@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哥林多前書 第十二章 查經分享</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:      #f0e8d0;
+    --parchment-dark: #dfd0a8;
+    --parchment-deep: #c8b078;
+    --ink:            #0e0e1a;
+    --ink-faded:      #2a2a42;
+    --ink-light:      #4a4a6a;
+    --rub-blue:       #1a2f6b;    /* 主色：保羅書信深藍 */
+    --rub-blue-mid:   #2a4a9a;
+    --rub-red:        #7a1a1a;    /* 輔助紅 */
+    --gold:           #b8820a;
+    --gold-pale:      #f0d878;
+    --gold-bg:        rgba(184,130,10,.07);
+    --blue-bg:        rgba(26,47,107,.06);
+    --border:         #c8b078;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #0e1420;
+    background-image:
+      radial-gradient(ellipse at 25% 15%, #182040 0%, transparent 55%),
+      radial-gradient(ellipse at 75% 85%, #0a0e1a 0%, transparent 55%);
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .codex-cover {
+    max-width: 820px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #1a2a4a 0%, #0c1020 100%);
+    border: 3px solid #2a4a8a;
+    border-radius: 3px;
+    padding: 6px;
+    box-shadow:
+      0 0 0 1px rgba(180,160,100,.3),
+      8px 12px 40px rgba(0,0,0,.85),
+      -2px -2px 12px rgba(50,80,180,.12);
+  }
+
+  .codex-page {
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+      linear-gradient(180deg, rgba(180,160,100,.2) 0%, transparent 12%, transparent 88%, rgba(160,130,70,.18) 100%);
+    border: 1px solid var(--parchment-dark);
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .codex-page::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 70px 130px at 4% 25%, rgba(120,90,30,.1) 0%, transparent 100%),
+      radial-gradient(ellipse 50px 90px at 96% 65%, rgba(100,80,20,.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* 左側藍色輔助線（書信感） */
+  .ruling-line {
+    position: absolute;
+    left: 2.6rem; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 5%, rgba(40,70,160,.2) 20%, rgba(40,70,160,.2) 80%, transparent 95%);
+  }
+  /* 右側輔助線 */
+  .ruling-line-r {
+    position: absolute;
+    right: 2.6rem; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 5%, rgba(40,70,160,.12) 20%, rgba(40,70,160,.12) 80%, transparent 95%);
+  }
+
+  /* ── 標題 ── */
+  .book-title-wrap {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .book-title-wrap::before,
+  .book-title-wrap::after {
+    content: '';
+    display: block;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--rub-blue), var(--gold), var(--rub-blue), transparent);
+    margin: 0.4rem auto;
+    max-width: 80%;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    color: var(--rub-blue-mid);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--rub-blue);
+    text-shadow: 1px 1px 0 rgba(184,130,10,.35);
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.98rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.15em;
+    margin-top: 0.25rem;
+  }
+
+  .date-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    color: var(--ink-light);
+    letter-spacing: 0.2em;
+    margin-top: 0.3rem;
+    opacity: 0.7;
+  }
+
+  /* ── 分隔線 ── */
+  .ornament-divider {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1rem;
+    letter-spacing: 0.5rem;
+    margin: 1.4rem 0;
+  }
+  .ornament-line {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment-deep), var(--gold), var(--parchment-deep), transparent);
+    margin: 0.2rem auto;
+    max-width: 70%;
+  }
+
+  /* ── 核心宣言（深藍框） ── */
+  .verse-declaration {
+    border: 2px solid var(--rub-blue);
+    background: linear-gradient(135deg, var(--blue-bg), var(--gold-bg));
+    padding: 1.1rem 1.5rem;
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+  }
+  .verse-declaration::before,
+  .verse-declaration::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold); font-size: 1rem;
+    background: var(--parchment); padding: 0 0.4rem;
+  }
+  .verse-declaration::before { top: -0.65rem; left: 50%; transform: translateX(-50%); }
+  .verse-declaration::after  { bottom: -0.65rem; left: 50%; transform: translateX(-50%); }
+  .verse-declaration p { font-size: 1rem; line-height: 1.9; color: var(--ink-faded); }
+  .verse-declaration strong { color: var(--rub-blue); font-weight: 700; }
+
+  /* ── 三章論證框（特殊） ── */
+  .trilogy-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--rub-blue);
+    margin: 1.2rem 0;
+  }
+  .trilogy-item {
+    padding: 0.8rem 1rem;
+    text-align: center;
+    border-right: 1px solid var(--parchment-deep);
+  }
+  .trilogy-item:last-child { border-right: none; }
+  .trilogy-item:nth-child(2) { background: var(--blue-bg); }
+  .trilogy-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--rub-blue);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .trilogy-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .trilogy-desc {
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    line-height: 1.5;
+  }
+
+  /* ── 章節標題 ── */
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--rub-blue);
+    letter-spacing: 0.1em;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1.5px solid var(--rub-blue);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-heading .roman {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .sub-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.86rem;
+    color: var(--rub-blue-mid);
+    letter-spacing: 0.08em;
+    margin: 1.2rem 0 0.5rem;
+    font-weight: 600;
+  }
+
+  /* ── 段落分析條目（五段式） ── */
+  .segment-block {
+    border: 1px solid var(--parchment-deep);
+    margin: 1rem 0;
+    background: rgba(240,232,208,.5);
+  }
+  .segment-header {
+    background: linear-gradient(90deg, var(--rub-blue) 0%, var(--rub-blue-mid) 100%);
+    padding: 0.4rem 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+  }
+  .segment-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--gold-pale);
+    letter-spacing: 0.08em;
+  }
+  .segment-title {
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 500;
+  }
+  .segment-body { padding: 0.8rem 1rem; }
+
+  .wrong-item, .right-item {
+    font-size: 0.83rem;
+    line-height: 1.75;
+    padding-left: 1.5em;
+    position: relative;
+    margin-bottom: 0.2rem;
+  }
+  .wrong-item { color: var(--ink-light); }
+  .wrong-item::before { content: '✗'; position: absolute; left: 0; color: var(--rub-red); font-weight: 700; }
+  .right-item { color: var(--ink-faded); }
+  .right-item::before { content: '→'; position: absolute; left: 0; color: var(--rub-blue); }
+
+  .segment-text {
+    font-size: 0.87rem;
+    line-height: 1.95;
+    color: var(--ink-faded);
+    text-align: justify;
+    margin-top: 0.5rem;
+  }
+  .segment-text strong { color: var(--rub-blue); }
+  .segment-text em.highlight {
+    font-style: normal;
+    color: var(--rub-red);
+    font-weight: 700;
+  }
+
+  /* ── 六句話摘要 ── */
+  .six-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin: 1rem 0;
+  }
+  @media (max-width: 600px) { .six-summary { grid-template-columns: 1fr; } .trilogy-box { grid-template-columns: 1fr; } }
+
+  .summary-card {
+    border: 1px solid var(--parchment-deep);
+    padding: 0.7rem 0.9rem;
+    background: linear-gradient(135deg, rgba(240,232,208,.8), rgba(226,210,170,.4));
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+  .summary-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--rub-blue);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.1rem;
+  }
+  .summary-content {}
+  .summary-key {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--gold);
+    letter-spacing: 0.07em;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .summary-text {
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    line-height: 1.6;
+  }
+
+  /* ── 本文段落 ── */
+  .body-text {
+    font-size: 0.9rem;
+    line-height: 2.0;
+    color: var(--ink-faded);
+    text-align: justify;
+    text-indent: 1.2em;
+    margin-bottom: 0.7rem;
+  }
+  .body-text.no-indent { text-indent: 0; }
+
+  /* ── 條列 ── */
+  .codex-list {
+    list-style: none; padding: 0;
+    margin: 0.5rem 0 0.8rem 0.5rem;
+  }
+  .codex-list li {
+    font-size: 0.87rem;
+    line-height: 1.85;
+    color: var(--ink-faded);
+    padding-left: 1.4em;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .codex-list li::before {
+    content: '◆';
+    position: absolute; left: 0;
+    color: var(--rub-blue);
+    font-size: 0.5rem;
+    top: 0.6em;
+  }
+
+  /* ── 重點經文框 ── */
+  .verse-highlight {
+    border-left: 3px solid var(--rub-blue);
+    background: linear-gradient(90deg, var(--blue-bg), transparent 80%);
+    padding: 0.75rem 1rem 0.75rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .verse-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.76rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .verse-text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* ── 查經心得 ── */
+  .devotion-box {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, var(--gold-bg), rgba(240,232,208,.3));
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .devotion-box::before {
+    content: '✝';
+    position: absolute;
+    top: -1rem; left: 50%; transform: translateX(-50%);
+    font-size: 1.3rem; color: var(--gold);
+    background: var(--parchment); padding: 0 0.5rem;
+  }
+  .devotion-salutation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--rub-blue);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ── 禱告文（斜體） ── */
+  .prayer-box {
+    border: 1px dashed var(--parchment-deep);
+    background: rgba(240,232,208,.6);
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0;
+    font-style: italic;
+    font-size: 0.87rem;
+    line-height: 2.0;
+    color: var(--ink-faded);
+    text-align: justify;
+  }
+  .prayer-box .prayer-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--rub-blue);
+    letter-spacing: 0.12em;
+    font-style: normal;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+
+  /* ── 頁腳 ── */
+  .codex-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--parchment-deep);
+  }
+  .codex-footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+    opacity: 0.65;
+  }
+
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="codex-cover">
+<div class="codex-page">
+<div class="ruling-line"></div>
+<div class="ruling-line-r"></div>
+
+<!-- ══ 標題 ══ -->
+<div class="book-title-wrap">
+  <div class="series-label">Epistola Prima Ad Corinthios · Caput XII</div>
+  <div class="book-title">哥林多前書</div>
+  <div class="chapter-subtitle">第十二章　查經分享</div>
+  <div class="date-tag">Anno Domini MMXXVI · I · X</div>
+</div>
+
+<div class="ornament-divider"><span>— ◆ —</span>&ensp;<span style="color:var(--rub-blue);font-size:1.2rem;">✝</span>&ensp;<span>— ◆ —</span></div>
+
+<!-- ══ 全書核心 ══ -->
+<div class="verse-declaration">
+  <p>《哥林多前書》的內容核心：<br>
+  在<strong>高度世俗化的城市</strong>中，<strong>教會要活出十字架福音</strong>。</p>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 一、前章回顧 ══ -->
+<div class="section-heading"><span class="roman">I</span> 前十一章回顧</div>
+
+<div class="body-text no-indent">前十一章的內容概要，分為四個部分：</div>
+
+<ul class="codex-list">
+  <li><strong>第一部分（１－４章）</strong>：十字架福音與教會合一。教會若偏離十字架，必然走向分裂與驕傲。哥林多教會的分裂，根源不是領袖問題，而是價值錯亂。</li>
+  <li><strong>第二部分（５－７章）</strong>：聖潔倫理與生活秩序。蒙恩的人，應在生活每一層面活出分別為聖。福音不只更新信念，也更新身體、性、婚姻與日常生活。</li>
+  <li><strong>第三部分（８－１０章）</strong>：基督徒的自由。真正的自由，是為他人與福音甘願限制自己。自由若無愛與敬畏，會成為絆腳石。</li>
+  <li><strong>第四部分（１１章）</strong>：敬拜秩序與屬靈生命方向，從「個人生活」轉向「聚會與群體建造」。</li>
+</ul>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 二、本章定位 ══ -->
+<div class="section-heading"><span class="roman">II</span> 第十二章的定位：啟動三章論證</div>
+
+<div class="body-text no-indent">《哥林多前書》第十二章，不是單獨談「恩賜」，而是啟動第十二至十四章的整體論證過程。屬靈的恩賜若脫離「同一位聖靈、同一個身體、同一個目的（造就教會）」，就會成為分裂的工具。</div>
+
+<div class="trilogy-box">
+  <div class="trilogy-item">
+    <span class="trilogy-num">十二</span>
+    <span class="trilogy-label">恩賜的來源與結構</span>
+    <div class="trilogy-desc">神學基礎</div>
+  </div>
+  <div class="trilogy-item">
+    <span class="trilogy-num">十三</span>
+    <span class="trilogy-label">恩賜的動機</span>
+    <div class="trilogy-desc">愛的規範</div>
+  </div>
+  <div class="trilogy-item">
+    <span class="trilogy-num">十四</span>
+    <span class="trilogy-label">恩賜的實踐</span>
+    <div class="trilogy-desc">秩序與造就</div>
+  </div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 三、分段解析 ══ -->
+<div class="section-heading"><span class="roman">III</span> 第十二章分段解析</div>
+
+<!-- 第一段 -->
+<div class="segment-block">
+  <div class="segment-header">
+    <span class="segment-ref">１２：１－３</span>
+    <span class="segment-title">第一段：屬靈事的判準——以「是否承認主權」為核心</span>
+  </div>
+  <div class="segment-body">
+    <div class="wrong-item">哥林多人熟悉「宗教狂熱、靈媒式敬拜、失控的屬靈經驗」</div>
+    <div class="wrong-item">把「強烈經驗」等同「屬靈」</div>
+    <div class="right-item">保羅提醒：屬靈不等於情緒高漲或神秘經驗</div>
+    <div class="segment-text">保羅一開始並未立即討論恩賜的種類，而是先為「屬靈」設下根本判準。他給出一個極為簡明卻嚴格的判準：<strong>凡出於神的靈，必不會否認耶穌是主；凡真正在聖靈中說話的，必承認耶穌的主權。</strong>在神學上，這一段確立了<em class="highlight">基督論是判斷屬靈經驗的最高標準</em>，任何看似屬靈、卻削弱基督主權或破壞教會合一的表現，都不能被視為真正的聖靈工作。</div>
+  </div>
+</div>
+
+<!-- 第二段 -->
+<div class="segment-block">
+  <div class="segment-header">
+    <span class="segment-ref">１２：４－１１</span>
+    <span class="segment-title">第二段：恩賜多樣，是同一位神的三一神學核心</span>
+  </div>
+  <div class="segment-body">
+    <div class="wrong-item">聖靈不是獨立表演者，恩賜不是個人所有物</div>
+    <div class="wrong-item">沒有「自選恩賜」，沒有「比較價值」</div>
+    <div class="right-item">恩賜 ＝ 聖靈為「公共造就」而顯明的工作</div>
+    <div class="segment-text">保羅刻意使用「同一位聖靈」、「同一位主」、「同一位神」的三重表述，清楚表明恩賜的運作是三一神的共同作為，而非人可操控或自我誇耀的資本。<strong>恩賜存在不是為了個人屬靈身分的標記，而是為了「叫人得益處」</strong>，也就是教會的共同建造。</div>
+  </div>
+</div>
+
+<!-- 第三段 -->
+<div class="segment-block">
+  <div class="segment-header">
+    <span class="segment-ref">１２：１２－１３</span>
+    <span class="segment-title">第三段：一個身體的根基——在聖靈裡的合一身分</span>
+  </div>
+  <div class="segment-body">
+    <div class="wrong-item">聖靈的洗，是指歸入基督身體，不是特殊第二經驗的標誌</div>
+    <div class="wrong-item">神的設計中，不同不是缺陷，而是必要</div>
+    <div class="right-item">教會的根本身份不是文化、背景、恩賜、差異，而是「在基督裡」</div>
+    <div class="segment-text">無論猶太人或希利尼人、為奴的或自主的，都因同一位聖靈受洗，歸入同一個身體。<strong>教會不是志同道合者的集合，而是因基督與聖靈而被實質連結的一個生命共同體，任何恩賜的理解都必須服從於這個合一事實。</strong></div>
+  </div>
+</div>
+
+<!-- 第四段 -->
+<div class="segment-block">
+  <div class="segment-header">
+    <span class="segment-ref">１２：１４－２６</span>
+    <span class="segment-title">第四段：肢體彼此需要——反對自卑與自大的雙重糾正</span>
+  </div>
+  <div class="segment-body">
+    <div class="wrong-item">教會不該複製社會階級</div>
+    <div class="wrong-item">教會不是屬靈的菁英主義</div>
+    <div class="right-item">彼此需要與彼此尊重，合一是「彼此連動的生命」</div>
+    <div class="segment-text">保羅以極具說服力的修辭指出，若身體只有一種肢體，便無法運作；正是那些看似軟弱、不體面的部分，反而更為要緊。<strong>神的安排具有反階級性：價值不是由可見度決定，而是由神的設計決定。</strong>教會的健康，不在於是否有明星式恩賜，而在於是否能彼此同苦同榮，形成真正的生命共同體。</div>
+  </div>
+</div>
+
+<!-- 第五段 -->
+<div class="segment-block">
+  <div class="segment-header">
+    <span class="segment-ref">１２：２７－３１</span>
+    <span class="segment-title">第五段：恩賜的秩序與更高的道路</span>
+  </div>
+  <div class="segment-body">
+    <div class="wrong-item">沒有單一恩賜是全民標配</div>
+    <div class="wrong-item">使徒、先知的分類，是功能與建造次序，不是身分等級</div>
+    <div class="right-item">「更大的恩賜」不是指更炫的能力，而是更能建造教會的方式</div>
+    <div class="segment-text">連續的反問句（「豈都是使徒嗎？」）直接否定「人人必須擁有某種特定恩賜」的觀念。保羅提出關鍵轉折：「你們要切切地求那更大的恩賜」，並預告將指示一條「最妙的道」，也就是第十三章的愛。<strong>恩賜需要被愛所規範，否則將失去其屬靈意義。</strong></div>
+  </div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 四、六句話全書 ══ -->
+<div class="section-heading"><span class="roman">IV</span> 六句話記住全書</div>
+
+<div class="six-summary">
+  <div class="summary-card">
+    <div class="summary-num">I</div>
+    <div class="summary-content">
+      <span class="summary-key">身分：因福音合一（１－４章）</span>
+      <div class="summary-text">被十字架呼召成一個家，活出與世俗智慧不同的群體。</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-num">II</div>
+    <div class="summary-content">
+      <span class="summary-key">聖潔：因身份而分別（５－７章）</span>
+      <div class="summary-text">在倫理、婚姻與生活處境中，以聖潔見證神的國度。</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-num">III</div>
+    <div class="summary-content">
+      <span class="summary-key">自由：為愛而限制（８－１０章）</span>
+      <div class="summary-text">自由不是自我中心，而是為使人得救而捨己與自律。</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-num">IV</div>
+    <div class="summary-content">
+      <span class="summary-key">敬拜：為造就而秩序（１１－１４章）</span>
+      <div class="summary-text">在敬拜中彰顯尊重、合一與造就，使恩賜成為祝福而非混亂。</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-num">V</div>
+    <div class="summary-content">
+      <span class="summary-key">盼望：因復活而堅固（１５章）</span>
+      <div class="summary-text">基督的復活確立信仰核心與最終盼望，使勞苦不徒然。</div>
+    </div>
+  </div>
+  <div class="summary-card">
+    <div class="summary-num">VI</div>
+    <div class="summary-content">
+      <span class="summary-key">實行：因信心而同行（１６章）</span>
+      <div class="summary-text">以愛心支持聖徒、堅守信仰，讓教會在實際行動中合一。</div>
+    </div>
+  </div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 五、查經心得 ══ -->
+<div class="section-heading"><span class="roman">V</span> 查經心得分享</div>
+
+<div class="devotion-box">
+  <div class="devotion-salutation">各位親愛的快樂查經班的弟兄姊妹</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">☆ 哥林多前書 １２：１２（核心經文）</span>
+    <div class="verse-text">「就如身子是一個，卻有許多肢體；而且肢體雖多，仍是一個身子；基督也是這樣。」</div>
+  </div>
+
+  <div class="body-text no-indent">這段經文提醒我們，信仰並不是單一個體的屬靈表現，而是一個彼此連結、互相依存的生命共同體。屬靈恩賜的目的，從來不是高舉自己，而是建造整體。</div>
+
+  <div class="sub-heading">◆ 交響樂團的比喻</div>
+  <div class="body-text no-indent">以交響樂團為例，沒有任何一件樂器能獨自完成一首交響曲。小提琴或許旋律突出，但若沒有低音提琴穩定節奏、木管樂器鋪陳色彩、打擊樂器掌握轉折，音樂便失去深度與張力。每一個聲部，都在自己的位置上，忠於樂譜，才能成就整體的和諧。教會，正如一首正在演奏中的交響樂。</div>
+
+  <div class="sub-heading">◆ 《教父》的反照</div>
+  <div class="body-text no-indent">電影《教父》系列中，柯里昂家族同樣被描繪為一個「身體」——有首領、有左右手、有各司其職的成員。然而，這個身體的運作邏輯建立在恐懼、忠誠交換與權力控制之中，而非彼此尊重與生命共享。當某個成員失去功能或不再符合家族利益時，便會被排除、犧牲。</div>
+  <div class="body-text no-indent">米高·柯里昂從一開始刻意與家族保持距離，到最終成為冷靜而孤絕的教父。他所建立的秩序看似高效穩定，實則使整個家族逐漸失去情感連結，只剩角色功能的運算。「身體」還在，但成員之間失去了所有的感情內在聯繫。</div>
+  <div class="body-text no-indent">這正與《哥林多前書》第十二章形成鮮明對比。保羅所描繪的「身體」，不是權力集中的組織，而是彼此相顧、互為肢體的生命共同體。在基督的身體裡，當一個肢體受苦，其他肢體不是計算風險，而是一同受苦；當一個肢體得榮耀，其他肢體不是感到威脅，而是真誠地一同喜樂。</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">哥林多前書 １２：２６</span>
+    <div class="verse-text">「若一個肢體受苦，所有肢體就一同受苦；若一個肢體得榮耀，所有肢體就一同快樂。」</div>
+  </div>
+
+  <div class="body-text no-indent">這不是口號，而是實際的生命連結。真正的屬靈成熟，不在於我擁有多少能力，而在於我是否願意與他人一同承擔、一同喜樂。這正是基督身體的見證。</div>
+</div>
+
+<!-- ══ 禱告 ══ -->
+<div class="prayer-box">
+  <div class="prayer-title">◆ 禱告文 ◆</div>
+  親愛的天父上帝。感謝祢藉著《哥林多前書》第十二章教導我們，教會不是由完美的人組成，而是由被恩典連結的肢體所構成。求祢赦免我們，當我們因比較而驕傲，或因自卑而退縮，忘記自己在祢身體中的位置。<br><br>
+  主啊，求祢幫助我們認識並接納祢所賜的恩賜，不輕看自己，也不貶抑他人。教導我們用愛心彼此配搭，用耐心彼此成全，使我們的群體能真實反映基督的生命。<br><br>
+  當有肢體軟弱時，求祢給我們同理與陪伴；當有人得著喜樂與成長時，也讓我們學習真誠的歡喜。願我們的教會，成為一個彼此相愛、彼此建造、榮耀祢名的身體。<br><br>
+  是奉主耶穌基督的名求，阿們。
+</div>
+
+
+<!-- ══ 頁腳 ══ -->
+<div class="codex-footer">
+  <div class="ornament-divider"><span>◆ ✝ ◆</span></div>
+  <p>Soli Deo Gloria　·　快樂查經班　·　哥林多前書第十二章</p>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

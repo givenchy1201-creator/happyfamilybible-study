@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬可福音 第一章 查經分享</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:       #f4e8c1;
+    --parchment-dark:  #e8d49a;
+    --parchment-deep:  #d4b96a;
+    --ink:             #1a0e00;
+    --ink-faded:       #3d2b1a;
+    --ink-light:       #5c3d1e;
+    --rubrication:     #8b1a1a;
+    --rubrication-gold:#7a5c00;
+    --gold:            #c8960c;
+    --gold-light:      #e8c84a;
+    --gold-pale:       #f5e090;
+    --blue-initial:    #1a3a6b;
+    --border-dark:     #5c3d1e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #2a1a0a;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, #3d2010 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, #1a0d05 0%, transparent 60%);
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  /* ── 外框：木板封面感 ── */
+  .codex-cover {
+    max-width: 820px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #3d2a10 0%, #1e1008 100%);
+    border: 3px solid #6b4a1e;
+    border-radius: 4px;
+    padding: 6px;
+    box-shadow:
+      0 0 0 1px #c8960c55,
+      8px 12px 40px rgba(0,0,0,.8),
+      -2px -2px 12px rgba(200,150,12,.15);
+  }
+
+  /* ── 羊皮紙主體 ── */
+  .codex-page {
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+      linear-gradient(180deg,
+        rgba(210,180,100,.25) 0%,
+        rgba(244,232,193,.0) 15%,
+        rgba(244,232,193,.0) 85%,
+        rgba(180,140,60,.2) 100%);
+    border: 1px solid var(--parchment-dark);
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 羊皮紙陳舊斑紋 */
+  .codex-page::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 60px 120px at 5% 30%, rgba(160,110,40,.12) 0%, transparent 100%),
+      radial-gradient(ellipse 40px 80px at 95% 70%, rgba(140,90,20,.1) 0%, transparent 100%),
+      radial-gradient(ellipse 80px 60px at 50% 95%, rgba(180,130,50,.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* ── 左側裝飾邊欄（書寫輔助線感） ── */
+  .ruling-line {
+    position: absolute;
+    left: 2.6rem;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 5%, rgba(160,110,60,.3) 20%, rgba(160,110,60,.3) 80%, transparent 95%);
+  }
+
+  /* ── 頁頂大標題 ── */
+  .book-title-wrap {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .book-title-wrap::before,
+  .book-title-wrap::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--rubrication), var(--gold), transparent);
+    margin: 0.4rem auto;
+    max-width: 85%;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--rubrication-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--rubrication);
+    text-shadow: 1px 1px 0 rgba(200,150,12,.4);
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.0rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.15em;
+    margin-top: 0.25rem;
+  }
+
+  /* ── 裝飾分隔線 ── */
+  .ornament-divider {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.5rem;
+    margin: 1.4rem 0;
+    line-height: 1;
+  }
+  .ornament-divider span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .ornament-divider .cross { color: var(--rubrication); font-size: 1.3rem; }
+  .ornament-line {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment-deep), var(--gold), var(--parchment-deep), transparent);
+    margin: 0.2rem auto;
+    max-width: 70%;
+  }
+
+  /* ── 核心經文宣言框 ── */
+  .verse-declaration {
+    border: 2px solid var(--rubrication);
+    background: linear-gradient(135deg, rgba(139,26,26,.06) 0%, rgba(200,150,12,.06) 100%);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+  }
+  .verse-declaration::before,
+  .verse-declaration::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .verse-declaration::before { top: -0.7rem; left: 50%; transform: translateX(-50%); background: var(--parchment); padding: 0 0.5rem; }
+  .verse-declaration::after { bottom: -0.7rem; left: 50%; transform: translateX(-50%); background: var(--parchment); padding: 0 0.5rem; }
+
+  .verse-declaration p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--ink-faded);
+  }
+  .verse-declaration strong {
+    color: var(--rubrication);
+    font-weight: 700;
+  }
+
+  /* ── 章節大標（帶彩飾首字母感） ── */
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: var(--rubrication);
+    letter-spacing: 0.1em;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--rubrication);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-heading .roman {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.15rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .sub-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    color: var(--blue-initial);
+    letter-spacing: 0.08em;
+    margin: 1.3rem 0 0.5rem;
+    font-weight: 600;
+  }
+
+  /* ── 比較表格 ── */
+  .manuscript-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin: 1rem 0 1.5rem;
+    line-height: 1.5;
+  }
+  .manuscript-table th {
+    background: linear-gradient(135deg, var(--rubrication) 0%, #6b1010 100%);
+    color: var(--gold-pale);
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.07em;
+    padding: 0.45rem 0.5rem;
+    border: 1px solid #6b1010;
+    text-align: center;
+  }
+  .manuscript-table td {
+    padding: 0.38rem 0.5rem;
+    border: 1px solid var(--parchment-deep);
+    color: var(--ink-faded);
+    vertical-align: top;
+    text-align: center;
+  }
+  .manuscript-table tr:nth-child(even) td {
+    background: rgba(200,150,12,.05);
+  }
+  .manuscript-table tr:first-child td {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .manuscript-table td:first-child {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--rubrication-gold);
+    font-weight: 600;
+    text-align: left;
+  }
+
+  /* ── 段落本文 ── */
+  .body-text {
+    font-size: 0.9rem;
+    line-height: 2.0;
+    color: var(--ink-faded);
+    text-align: justify;
+    text-indent: 1.2em;
+    margin-bottom: 0.7rem;
+  }
+  .body-text.no-indent { text-indent: 0; }
+
+  /* ── 條列項目 ── */
+  .codex-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0.8rem 0.5rem;
+  }
+  .codex-list li {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: var(--ink-faded);
+    padding-left: 1.4em;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .codex-list li::before {
+    content: '✦';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.6rem;
+    top: 0.55em;
+  }
+  .codex-list.numbered { counter-reset: codex-counter; }
+  .codex-list.numbered li::before {
+    content: counter(codex-counter) '.';
+    counter-increment: codex-counter;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--rubrication);
+    top: 0.3em;
+  }
+
+  /* ── 重點經文框（彩色邊框） ── */
+  .verse-highlight {
+    border-left: 3px solid var(--rubrication);
+    background: linear-gradient(90deg, rgba(139,26,26,.06) 0%, transparent 80%);
+    padding: 0.8rem 1rem 0.8rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .verse-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .verse-text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* ── 神學主題標籤列 ── */
+  .theme-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin: 0.8rem 0;
+  }
+  .theme-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+    padding: 0.2rem 0.7rem;
+    border: 1px solid var(--rubrication);
+    color: var(--rubrication);
+    background: rgba(139,26,26,.05);
+  }
+
+  /* ── 敘事散文框（側寫） ── */
+  .narrative-box {
+    border: 1px solid var(--parchment-deep);
+    background: linear-gradient(160deg, rgba(200,150,12,.06) 0%, rgba(244,232,193,.3) 100%);
+    padding: 1.3rem 1.5rem;
+    margin: 1.2rem 0;
+    position: relative;
+  }
+  .narrative-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    background: var(--parchment);
+    padding: 0 0.3rem;
+    opacity: 0.6;
+  }
+  .narrative-box p {
+    font-size: 0.88rem;
+    line-height: 2.05;
+    color: var(--ink-faded);
+    text-align: justify;
+    margin-bottom: 0.6rem;
+    text-indent: 1.2em;
+  }
+  .narrative-box p:last-child { margin-bottom: 0; }
+
+  /* ── 查經心得（牧者聲音） ── */
+  .devotion-box {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, rgba(200,150,12,.08) 0%, rgba(244,232,193,.2) 100%);
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .devotion-box::before {
+    content: '✝';
+    position: absolute;
+    top: -1rem; left: 50%; transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: var(--gold);
+    background: var(--parchment);
+    padding: 0 0.5rem;
+  }
+  .devotion-salutation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--rubrication-gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+
+  /* ── 重點經文釋疑條目 ── */
+  .exegesis-block {
+    margin: 1.2rem 0;
+  }
+  .exegesis-verse {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(90deg, rgba(200,150,12,.1), transparent);
+    border-left: 2px solid var(--gold);
+  }
+  .exegesis-verse em {
+    color: var(--rubrication);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ── 結構大綱框 ── */
+  .outline-box {
+    border: 1px solid var(--parchment-deep);
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    background: rgba(200,150,12,.04);
+  }
+  .outline-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--rubrication);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+  .outline-item {
+    font-size: 0.83rem;
+    color: var(--ink-faded);
+    line-height: 1.75;
+    padding-left: 1.2em;
+    position: relative;
+  }
+  .outline-item::before {
+    content: '❧';
+    position: absolute; left: 0;
+    color: var(--rubrication);
+    font-size: 0.75rem;
+  }
+
+  /* ── 五重點框 ── */
+  .five-points {
+    border: 1.5px solid var(--rubrication);
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    background: rgba(139,26,26,.03);
+  }
+  .five-points-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--rubrication);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid var(--rubrication);
+    padding-bottom: 0.4rem;
+  }
+  .five-point-item {
+    font-size: 0.85rem;
+    color: var(--ink-faded);
+    line-height: 1.8;
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 0.2rem;
+  }
+  .five-point-num {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    width: 1.2rem;
+    text-align: right;
+  }
+
+  /* ── 頁腳 ── */
+  .codex-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--parchment-deep);
+  }
+  .codex-footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+
+  /* ── 雙欄（備用） ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── 印刷樣式 ── */
+  @media print {
+    body { background: white; padding: 0; }
+    .codex-cover { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+    .codex-page { padding: 2rem; }
+  }
+
+  /* ── 強調文字 ── */
+  strong { color: var(--ink); }
+  em.red { color: var(--rubrication); font-style: normal; }
+  em.gold { color: var(--rubrication-gold); font-style: normal; }
+</style>
+</head>
+<body>
+
+<div class="codex-cover">
+<div class="codex-page">
+<div class="ruling-line"></div>
+
+<!-- ══ 標題區 ══ -->
+<div class="book-title-wrap">
+  <div class="series-label">Evangelium Secundum Marcum</div>
+  <div class="book-title">馬可福音</div>
+  <div class="chapter-subtitle">第一章　查經分享</div>
+</div>
+
+<div class="ornament-divider">
+  <span>— ✦ —</span><span class="cross"> ✝ </span><span>— ✦ —</span>
+</div>
+
+<!-- ══ 全書核心宣言 ══ -->
+<div class="verse-declaration">
+  <p>耶穌是<strong>神的兒子</strong>（可１：１），但祂選擇以<strong>僕人的身分</strong>（可１０：４５）<br>
+  透過受苦與復活帶來救贖。<br>
+  凡跟隨祂的人，應當<strong>捨己、背十字架</strong>（可８：３４）。</p>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 一、經書背景 ══ -->
+<div class="section-heading"><span class="roman">I</span> 《馬可福音》經書背景</div>
+
+<div class="body-text no-indent">《馬可福音》為四福音書中最短、最緊湊之書，省略登山寶訓等長篇講道：</div>
+
+<ul class="codex-list numbered">
+  <li>省略耶穌出生與童年，直接從施洗約翰開始。</li>
+  <li>原始結尾可能止於可１６：８（空墳墓），後來的長結尾（可１６：９－２０）為早期教會添加。</li>
+  <li>章節數不等於內容量：馬太雖有２８章，節數少於路加；約翰福音每章篇幅較長。</li>
+  <li>馬太、馬可、路加三福音內容重疊率高，而約翰福音的９０％內容為獨有。</li>
+</ul>
+
+<!-- 四福音比較表 -->
+<div class="manuscript-table" style="overflow-x:auto;">
+<table class="manuscript-table">
+  <thead>
+    <tr>
+      <th>主題</th>
+      <th>《馬太福音》</th>
+      <th>《馬可福音》</th>
+      <th>《路加福音》</th>
+      <th>《約翰福音》</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>篇幅</td>
+      <td>２８章 １０７１節</td>
+      <td>１６章 ６７８節</td>
+      <td>２４章 １１５１節</td>
+      <td>２１章 ８７９節</td>
+    </tr>
+    <tr>
+      <td>作者</td>
+      <td>稅吏馬太</td>
+      <td>約翰·馬可（彼得門徒）</td>
+      <td>醫生路加（保羅同工）</td>
+      <td>使徒約翰</td>
+    </tr>
+    <tr>
+      <td>成書時間</td>
+      <td>約公元 ７０－９０年</td>
+      <td>約公元 ６０－７０年</td>
+      <td>約公元 ７０－９０年</td>
+      <td>約公元 ９０－１００年</td>
+    </tr>
+    <tr>
+      <td>寫作對象</td>
+      <td>猶太基督徒</td>
+      <td>羅馬外邦人</td>
+      <td>希臘人</td>
+      <td>普世教會信徒</td>
+    </tr>
+    <tr>
+      <td>耶穌形象</td>
+      <td>彌賽亞、新摩西</td>
+      <td>苦難僕人、神子</td>
+      <td>救贖主、完全人子</td>
+      <td>道成肉身的神子</td>
+    </tr>
+    <tr>
+      <td>獨特內容</td>
+      <td>登山寶訓、東方博士</td>
+      <td>急迫風格、神蹟密集</td>
+      <td>浪子比喻、好撒瑪利亞人</td>
+      <td>「我是」宣言、拉撒路復活</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub-heading">◈ 《馬可福音》寫作四大特色</div>
+
+<ul class="codex-list numbered">
+  <li><strong>寫作對象為外邦人</strong>——特別是羅馬各行省讀者，會解釋猶太習俗（如飯前洗手），使用大量拉丁詞彙，強調耶穌的神蹟與權柄，因羅馬文化崇尚力量。</li>
+  <li><strong>聚焦受苦的僕人與彌賽亞的秘密</strong>——耶穌多次禁止人宣揚祂是基督（可１：４４，５：４３，７：３６，８：３０），目的是避免群眾誤解彌賽亞為政治領袖，更強調十字架的象徵意義。</li>
+  <li><strong>負面呈現門徒的失敗形象</strong>——門徒常「不明白」耶穌作為（可４：１３，６：５２，８：１７－２１）；彼得三次否認耶穌（可１４：６６－７２）。目的是提醒讀者：跟隨耶穌需付代價，但恩典足夠。</li>
+  <li><strong>最古老梵蒂岡抄本止於可１６：８</strong>——「她們就出來，從墳墓那裡逃跑，又發抖又驚奇，什麼也不告訴人，因為她們害怕。」為讀者留下懸念。</li>
+</ul>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 二、神學主題 ══ -->
+<div class="section-heading"><span class="roman">II</span> 可深究的神學主題</div>
+
+<div class="theme-tags">
+  <span class="theme-tag">神的國度（可１：１５）</span>
+  <span class="theme-tag">彌賽亞的秘密</span>
+  <span class="theme-tag">門徒的代價（可８：３４－３８）</span>
+  <span class="theme-tag">十字架與復活</span>
+</div>
+
+<ul class="codex-list">
+  <li><strong>神的國度</strong>（可１：１５）：福音的核心是「神的國臨近」，人需要悔改信福音。</li>
+  <li><strong>彌賽亞的秘密</strong>：耶穌多次禁止人宣揚祂的身分（可１：４４，８：３０），因祂的使命是透過受苦完成救贖。</li>
+  <li><strong>門徒的代價</strong>（可８：３４－３８）：跟隨耶穌不是追求成功，而是捨己、服事他人。</li>
+  <li><strong>十字架與復活</strong>：耶穌的死不是失敗，而是勝過罪惡權勢的途徑（可１０：４５）。</li>
+</ul>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 三、全書結構 ══ -->
+<div class="section-heading"><span class="roman">III</span> 全書經文結構</div>
+
+<div class="two-col">
+  <div class="outline-box">
+    <div class="outline-title">◈ 序幕（１：１－１５）</div>
+    <div class="outline-item">施洗約翰預備道路</div>
+    <div class="outline-item">耶穌受洗與受試探</div>
+  </div>
+  <div class="outline-box">
+    <div class="outline-title">◈ 加利利事工（１：１６－８：２６）</div>
+    <div class="outline-item">呼召門徒與初期神蹟（１：１６－３：１２）</div>
+    <div class="outline-item">比喻教導與神蹟擴展（３：１３－６：６）</div>
+    <div class="outline-item">門徒訓練與外邦事工（６：７－８：２６）</div>
+  </div>
+  <div class="outline-box">
+    <div class="outline-title">◈ 十架預言之路（８：２７－１０：５２）</div>
+    <div class="outline-item">彼得認信與首次預言（８：２７－９：１）</div>
+    <div class="outline-item">變像與門徒教導（９：２－５０）</div>
+    <div class="outline-item">進京前最後訓誨（１０：１－５２）</div>
+  </div>
+  <div class="outline-box">
+    <div class="outline-title">◈ 耶路撒冷對決（１１－１５章）</div>
+    <div class="outline-item">榮耀進城與聖殿衝突（１１章）</div>
+    <div class="outline-item">末世講論（１３章）</div>
+    <div class="outline-item">受難週事件（１４－１５章）</div>
+  </div>
+</div>
+
+<div class="outline-box" style="margin-top:0;">
+  <div class="outline-title">◈ 復活結局（１６章）</div>
+  <div class="outline-item">空墳墓（１６：１－８）</div>
+  <div class="outline-item">復活顯現（１６：９－２０）</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 四、第一章結構 ══ -->
+<div class="section-heading"><span class="roman">IV</span> 第一章內容結構</div>
+
+<div class="five-points">
+  <div class="five-points-title">第一章　五個敘事重點</div>
+  <div class="five-point-item"><span class="five-point-num">一</span><span>施洗約翰預備道路（１－８節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">二</span><span>耶穌受洗與受試探（９－１３節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">三</span><span>開始傳道與呼召門徒（１４－２０節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">四</span><span>權柄展現：趕鬼、醫病、禱告（２１－３９節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">五</span><span>潔淨痲瘋病人與名聲傳開（４０－４５節）</span></div>
+</div>
+
+<div class="body-text no-indent">《馬可福音》第一章的內容，主要是呈現【耶穌】這個「角色」：祂是受聖靈印證的神子、祂是戰勝試探的人子、祂是帶權柄的教師與醫治者。</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 五、側寫敘事 ══ -->
+<div class="section-heading"><span class="roman">V</span> 側寫的敘事方式</div>
+
+<div class="narrative-box">
+  <p>清晨的約旦河邊，施洗者約翰穿著駱駝毛衣服，大聲呼喊著要大家悔改。很多人來找他受洗，河邊擠滿了認罪的人群。有一天，耶穌也來受洗。當祂從水裡起來時，天空突然打開，聖靈像鴿子一樣降在祂身上。之後，耶穌獨自去曠野待了四十天，面對魔鬼的試探。</p>
+  <p>開始傳道後，耶穌在迦百農的會堂教導人。有一次，一個被鬼附身的人在會堂裡大叫，耶穌一句話就把鬼趕走了，讓所有人都很驚訝。下午，耶穌去西門家，治好他發燒的岳母。消息傳開後，天還沒黑，門口就擠滿了病人，耶穌一一治好他們。</p>
+  <p>特別的是，一個長年患痲瘋病的人跪著求耶穌醫治。耶穌不但沒躲開，還伸手摸他，馬上就治好了他的病。雖然耶穌叮囑他不要張揚，但這個人實在太開心了，到處告訴別人，結果耶穌反而不能公開進城，只能待在偏僻的地方。</p>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 六、重點經文釋疑 ══ -->
+<div class="section-heading"><span class="roman">VI</span> 重點經文釋疑</div>
+
+<!-- 1:9 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １：９　<em>「那時，耶穌從加利利的拿撒勒來，在約旦河裡受了約翰的洗。」</em></div>
+  <div class="body-text no-indent">拿撒勒，位於加利利山區，非主要商道或宗教中心，在《舊約》和當代文獻中均未提及，顯示其微不足道。猶太人輕視加利利人（約７：４１，５２），而拿撒勒更被嘲諷：「拿撒勒還能出什麼好的嗎？」（約１：４６）。</div>
+  <div class="body-text no-indent">耶穌彌賽亞竟出於卑微之地，應驗先知所說「祂要稱為拿撒勒人」的預言（太２：２３），凸顯神的旨意。傳統上加利利因靠近腓尼基、敘利亞，族群混雜，被視為「不純正」。耶穌選擇此地開展事工，暗示祂的使命將打破種族與階級隔閡，預示基督教將成為普世宗教。</div>
+</div>
+
+<!-- 1:14 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １：１４　<em>「約翰下監以後，耶穌來到加利利，宣傳神的福音。」</em></div>
+  <div class="body-text no-indent">施洗約翰因公開批評希律王安提帕（Herod Antipas）的婚姻不道德而被捕：希律王娶了兄弟腓力的妻子希羅底，違反猶太律法（利未記１８：１６，２０：２１）。約翰直言指責：「你娶你兄弟的妻子是不合理的！」（可６：１８），激怒希羅底，導致被囚禁，後遭斬首（可６：２１－２８）。</div>
+  <div class="body-text no-indent">馬可福音省略約翰下監的具體細節，直接聚焦耶穌的行動，凸顯「神的國」已臨到。耶穌選擇在約翰被捕後「回到加利利」，可能為避開希律的注意。<strong>真理的代價</strong>：約翰因堅持真理付上代價，後來耶穌也呼召門徒「背十字架」。<strong>神的主權</strong>：人的迫害不能攔阻神的計畫——約翰下監後，耶穌的福音工作更廣傳。</div>
+</div>
+
+<!-- 1:44 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １：４４　<em>「你要謹慎，什麼話都不可告訴人；只要去把身體給祭司察看，又因為你潔淨了，獻上摩西所吩咐的禮物，對眾人作證據。」</em></div>
+
+  <div class="body-text no-indent"><strong>❶ 舊約律法規定：</strong>痲瘋病得潔淨者需按《利未記》１４：１－３２執行複雜儀式，包括祭司檢驗（利１４：３）、獻祭流程（兩隻鳥、香柏木、朱紅色線、牛膝草）及社會恢復（利１４：７）。</div>
+
+  <div class="body-text no-indent"><strong>❷ 耶穌的用意：</strong>一方面尊重律法（太５：１７）；另一方面讓舊有的權威象徵透過病人見證新權柄降生——讓祭司官方間接認證神蹟，成為耶穌彌賽亞身分的公開證據。在舊時代，痲瘋被視為「罪的象徵」（民１２：１０），潔淨神蹟直接挑戰祭司權威，迫使他們面對天的新權柄。</div>
+
+  <div class="body-text no-indent"><strong>❸「不可告訴人」——彌賽亞的秘密：</strong>耶穌多次禁止受惠者宣揚神蹟（可１：３４，５：４３，７：３６），是為了避免引發群眾對「政治彌賽亞」的誤解，同時控制事工節奏，避免過早引發宗教領袖敵對（可３：６）。</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">可 １０：４５</span>
+    <div class="verse-text">「人子來，不是要受人的服事，乃是要服事人，並且要捨命，作多人的贖價。」</div>
+  </div>
+
+  <div class="body-text no-indent">耶穌的「十架道路」是顛覆性使命：不是政治革命，而是罪孽的救贖；不是針對猶太選民，而是全人類「罪」的救贖；不是世俗權力，而是神國降臨；不是武力征服，而是愛與犧牲。</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 七、查經心得 ══ -->
+<div class="section-heading"><span class="roman">VII</span> 查經心得分享</div>
+
+<div class="devotion-box">
+  <div class="devotion-salutation">各位親愛的快樂查經班的弟兄姊妹</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">☆ 可 １：１３（核心經文）</span>
+    <div class="verse-text">「祂在曠野四十天受撒旦的試探，並與野獸同在一處，且有天使來伺候祂。」</div>
+  </div>
+
+  <div class="body-text no-indent">這句話是全章的縮影：耶穌基督以僕人之姿進入混亂世界，經歷試探卻全然得勝，為要拯救祂的子民。</div>
+
+  <div class="sub-heading">◈ 聖經中的其它【四十天】</div>
+  <ul class="codex-list">
+    <li><strong>摩西</strong>：在西奈山四十晝夜禁食領受律法（出２４：１８）。</li>
+    <li><strong>以利亞</strong>：逃往何烈山四十天，經歷神的聲音（王上１９：８）。</li>
+    <li><strong>以色列民</strong>：在曠野漂流四十年，受試驗（申８：２）。</li>
+  </ul>
+
+  <div class="sub-heading">◈ 【與野獸同處】的神學意涵</div>
+  <div class="body-text no-indent">象徵彌賽亞的權能——先知預言彌賽亞將「與野獸和睦」（賽１１：６－９），耶穌在試探中不被害，預表祂終極得勝罪惡與死亡。此處也對比亞當的失敗：亞當在伊甸園安全舒適之境竟被蛇誘惑，反觀耶穌卻在曠野危險之地勝過撒旦誘惑。</div>
+
+  <div class="sub-heading">◈ 【曠野】的四重象徵</div>
+  <ul class="codex-list">
+    <li><strong>試探之地</strong>：撒旦攻擊神兒女的信仰與身分（弗６：１７）。</li>
+    <li><strong>塑造之地</strong>：孤獨危險的環境，反而是神塑造信仰的學校（何２：１４）。</li>
+    <li><strong>預備之地</strong>：約翰與耶穌皆從曠野開始使命，提醒信徒以預備心聆聽神。</li>
+    <li><strong>得勝之地</strong>：基督在曠野擊敗撒旦，預告十字架的最終勝利。</li>
+  </ul>
+
+  <div class="body-text no-indent">在我們的生命中，也常常經歷如此曠野的時刻：工作想放棄、關係難以持續、面臨道德與利益的抉擇。就像《魔戒》中佛羅多帶著魔戒獨行，我們每個人的生命，都在經歷自己的「曠野試煉」。</div>
+
+  <div class="body-text no-indent">聖經中的曠野，可能是孤獨處境、資源匱乏、危險環境；我們所面對的曠野可能是醫生宣布壞消息的診療間、凌晨三點的辦公室、被太太趕出房門的客廳沙發……你的曠野是哪裡？</div>
+
+  <div class="body-text no-indent">感謝神，可１：１３不只記載試探，更給我們寶貴應許——天使在暗中伺候，在最艱難的時刻，神的幫助從不缺席。</div>
+
+  <div class="sub-heading">◈ 在試探中得勝的三件事</div>
+  <ul class="codex-list numbered">
+    <li>禱告、信靠神的話語，帶著聖經話語進入曠野的試煉。</li>
+    <li>接受屬靈同伴的建議與幫助，軟弱時身邊定會有上帝派來的天使。</li>
+    <li>仰望最終勝利的到來——「仰望為我們信心創始成終的耶穌」（希１２：２）。</li>
+  </ul>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">詩篇 ２３：１</span>
+    <div class="verse-text">「耶和華是我的牧者，我必不致缺乏。」</div>
+  </div>
+
+  <div class="body-text no-indent">孔子說：「君子慎於獨」。即使身邊高朋滿座，我們每個人隨時都有可能落入危險的曠野中。但請記得，身處曠野面對心靈野獸，你的掙扎，耶穌也曾經歷；你的危險，祂定能保守；你的需要，祂必能供應。</div>
+</div>
+
+
+<!-- ══ 頁腳 ══ -->
+<div class="codex-footer">
+  <div class="ornament-divider"><span>✦ ✝ ✦</span></div>
+  <p>Soli Deo Gloria　·　快樂查經班　·　馬可福音第一章</p>
+</div>
+
+</div><!-- .codex-page -->
+</div><!-- .codex-cover -->
+
+</body>
+</html>

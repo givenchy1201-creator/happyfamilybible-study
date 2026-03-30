@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>哥林多後書 第三章 查經分享</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:      #ede8d8;
+    --parchment-dark: #d8ceae;
+    --parchment-deep: #b8a878;
+    --ink:            #100e08;
+    --ink-faded:      #302a1a;
+    --ink-light:      #584e38;
+    --rub-olive:      #3a4a1a;
+    --rub-olive-mid:  #5a6a28;
+    --rub-rust:       #7a3010;
+    --gold:           #9a7808;
+    --gold-mid:       #c8a010;
+    --gold-pale:      #ead878;
+    --green-bg:       rgba(58,74,26,.06);
+    --rust-bg:        rgba(122,48,16,.05);
+    --gold-bg:        rgba(154,120,8,.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #181408;
+    background-image:
+      radial-gradient(ellipse at 30% 20%, #28200a 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 80%, #100c04 0%, transparent 55%);
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .codex-cover {
+    max-width: 820px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #2a2408 0%, #141008 100%);
+    border: 3px solid #4a3e14;
+    border-radius: 3px;
+    padding: 6px;
+    box-shadow:
+      0 0 0 1px rgba(160,140,40,.25),
+      8px 12px 40px rgba(0,0,0,.85),
+      -2px -2px 12px rgba(100,120,20,.1);
+  }
+
+  .codex-page {
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+      linear-gradient(175deg, rgba(160,140,60,.18) 0%, transparent 15%, transparent 85%, rgba(140,110,40,.15) 100%);
+    border: 1px solid var(--parchment-dark);
+    padding: 3rem 3.5rem;
+    position: relative; overflow: hidden;
+  }
+
+  .codex-page::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 100px 60px at 88% 12%, rgba(120,100,40,.08) 0%, transparent 100%),
+      radial-gradient(ellipse 60px 100px at 8% 78%, rgba(100,80,30,.07) 0%, transparent 100%),
+      radial-gradient(ellipse 80px 80px at 50% 50%, rgba(140,120,60,.04) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .ruling-line {
+    position: absolute; left: 2.6rem; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(180deg, transparent 5%, rgba(58,74,26,.22) 20%, rgba(58,74,26,.22) 80%, transparent 95%);
+  }
+
+  /* ── 標題 ── */
+  .book-title-wrap { text-align: center; margin-bottom: 2rem; position: relative; }
+  .book-title-wrap::before, .book-title-wrap::after {
+    content: ''; display: block; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--rub-olive), var(--gold-mid), var(--rub-olive), transparent);
+    margin: 0.45rem auto; max-width: 82%;
+  }
+  .series-label {
+    font-family: 'Cinzel', serif; font-size: 0.7rem;
+    letter-spacing: 0.35em; color: var(--rub-olive-mid);
+    text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+  .book-title {
+    font-family: 'Cinzel Decorative', serif; font-size: 1.8rem;
+    font-weight: 700; color: var(--rub-olive);
+    text-shadow: 1px 1px 0 rgba(154,120,8,.4);
+    line-height: 1.2; letter-spacing: 0.04em;
+  }
+  .chapter-subtitle {
+    font-family: 'Cinzel', serif; font-size: 0.98rem;
+    color: var(--ink-faded); letter-spacing: 0.15em; margin-top: 0.25rem;
+  }
+  .chapter-tagline {
+    font-size: 0.9rem; color: var(--rub-rust);
+    margin-top: 0.4rem; font-style: italic;
+  }
+
+  /* ── 分隔線 ── */
+  .ornament-divider {
+    text-align: center; color: var(--gold);
+    font-size: 1rem; letter-spacing: 0.5rem; margin: 1.4rem 0;
+  }
+  .ornament-line {
+    display: block; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment-deep), var(--gold-mid), var(--parchment-deep), transparent);
+    margin: 0.2rem auto; max-width: 70%;
+  }
+
+  /* ── 核心口訣橫幅 ── */
+  .motto-banner {
+    border-top: 2px solid var(--rub-olive);
+    border-bottom: 2px solid var(--rub-olive);
+    padding: 0.9rem 1.5rem; margin: 1.5rem 0;
+    text-align: center;
+    background: linear-gradient(135deg, var(--green-bg), var(--gold-bg));
+    position: relative;
+  }
+  .motto-banner::before {
+    content: '🧩'; position: absolute;
+    top: -0.85rem; left: 50%; transform: translateX(-50%);
+    font-size: 1rem; background: var(--parchment); padding: 0 0.4rem;
+  }
+  .motto-banner .motto-text {
+    font-family: 'Cinzel', serif;
+    font-size: 0.92rem; color: var(--rub-olive);
+    letter-spacing: 0.08em; line-height: 1.6;
+  }
+
+  /* ── 章節標題 ── */
+  .section-heading {
+    font-family: 'Cinzel', serif; font-size: 0.98rem; font-weight: 700;
+    color: var(--rub-olive); letter-spacing: 0.1em;
+    margin: 2rem 0 0.8rem; padding-bottom: 0.3rem;
+    border-bottom: 1.5px solid var(--rub-olive);
+    display: flex; align-items: center; gap: 0.7rem;
+  }
+  .section-heading .module-num {
+    font-family: 'Cinzel', serif; font-size: 0.88rem;
+    color: var(--gold-mid); flex-shrink: 0;
+    border: 1px solid var(--gold); border-radius: 50%;
+    width: 1.75rem; height: 1.75rem;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+
+  .sub-heading {
+    font-family: 'Cinzel', serif; font-size: 0.86rem;
+    color: var(--rub-olive-mid); letter-spacing: 0.08em;
+    margin: 1.2rem 0 0.5rem; font-weight: 600;
+  }
+
+  /* ── 結構三段 ── */
+  .structure-row {
+    display: flex; gap: 0; border: 1px solid var(--parchment-deep);
+    margin: 0.5rem 0;
+  }
+  .structure-bullet {
+    flex-shrink: 0; width: 2.4rem;
+    background: linear-gradient(180deg, var(--rub-olive), var(--rub-olive-mid));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cinzel', serif; font-size: 0.75rem; color: var(--gold-pale);
+    letter-spacing: 0;
+  }
+  .structure-content {
+    padding: 0.55rem 0.9rem; font-size: 0.87rem;
+    line-height: 1.75; color: var(--ink-faded);
+    background: rgba(237,232,216,.5);
+  }
+  .structure-content strong { color: var(--rub-olive); }
+
+  /* ── 神學矯正 ── */
+  .theology-block { margin: 0.7rem 0; }
+  .misunder {
+    font-size: 0.85rem; color: var(--ink-light);
+    padding: 0.4rem 0.8rem 0.4rem 1.6rem; position: relative;
+    line-height: 1.75; border-left: 2px solid var(--rub-rust);
+    background: var(--rust-bg); margin-bottom: 0.25rem;
+  }
+  .misunder::before { content: '✖'; position: absolute; left: 0.4rem; color: var(--rub-rust); font-weight: 700; }
+  .truth {
+    font-size: 0.87rem; color: var(--ink-faded);
+    padding: 0.4rem 0.8rem 0.4rem 1.6rem; position: relative;
+    line-height: 1.85; border-left: 2px solid var(--rub-olive);
+    background: var(--green-bg); margin-bottom: 0.5rem;
+  }
+  .truth::before { content: '👉'; position: absolute; left: 0.35rem; font-size: 0.8rem; top: 0.45rem; }
+  .truth strong { color: var(--rub-olive); }
+
+  /* ── 側寫敘事 ── */
+  .narrative-scene {
+    border: 1px solid var(--parchment-deep);
+    background: linear-gradient(160deg, rgba(154,120,8,.05), rgba(237,232,216,.5));
+    padding: 1.3rem 1.5rem; margin: 1.2rem 0; position: relative;
+  }
+  .narrative-scene::before {
+    content: '"'; position: absolute; top: -0.5rem; left: 1rem;
+    font-family: 'Cinzel Decorative', serif; font-size: 3rem;
+    color: var(--gold-mid); line-height: 1;
+    background: var(--parchment); padding: 0 0.3rem; opacity: 0.5;
+  }
+  .narrative-scene p {
+    font-size: 0.88rem; line-height: 2.05;
+    color: var(--ink-faded); text-align: justify;
+    margin-bottom: 0.55rem; text-indent: 1.2em;
+  }
+  .narrative-scene p:last-child { margin-bottom: 0; }
+  .narrative-scene p.contrast { font-style: italic; }
+
+  /* ── 重點經文釋疑 ── */
+  .exegesis-block { margin: 1.2rem 0; }
+  .exegesis-verse {
+    font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--gold-mid);
+    letter-spacing: 0.08em; margin-bottom: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(90deg, rgba(154,120,8,.08), transparent);
+    border-left: 2px solid var(--gold-mid); display: block;
+  }
+  .verse-quote {
+    font-size: 0.9rem; line-height: 1.85; color: var(--ink);
+    font-style: italic; padding: 0.5rem 0.9rem;
+    border-left: 3px solid var(--rub-olive);
+    background: var(--green-bg); margin: 0.3rem 0 0.6rem;
+  }
+  .exegesis-body {
+    font-size: 0.87rem; line-height: 1.95;
+    color: var(--ink-faded); text-align: justify;
+  }
+  .exegesis-body strong { color: var(--rub-olive); }
+  .exegesis-note {
+    font-size: 0.83rem; line-height: 1.85; color: var(--ink-faded);
+    padding: 0.5rem 0.9rem; margin-top: 0.4rem;
+    border: 1px dashed var(--parchment-deep);
+    background: rgba(237,232,216,.5);
+  }
+  .exegesis-note::before { content: '🧩 '; }
+
+  /* ── 跨界共鳴 ── */
+  .resonance-section { margin: 1rem 0; }
+  .resonance-item {
+    border-left: 3px solid var(--rub-olive);
+    background: linear-gradient(90deg, var(--green-bg), transparent 85%);
+    padding: 0.85rem 1rem 0.85rem 1.2rem;
+    margin: 0.7rem 0;
+  }
+  .resonance-title {
+    font-family: 'Cinzel', serif; font-size: 0.78rem;
+    color: var(--gold); letter-spacing: 0.08em; margin-bottom: 0.4rem;
+  }
+  .resonance-text {
+    font-size: 0.87rem; line-height: 1.9; color: var(--ink-faded);
+  }
+  .resonance-text strong { color: var(--rub-olive); }
+  .resonance-text em { color: var(--rub-rust); font-style: italic; }
+
+  /* ── 應用練習 ── */
+  .practice-list { list-style: none; padding: 0; margin: 0.8rem 0; }
+  .practice-list li {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    font-size: 0.87rem; line-height: 1.85;
+    color: var(--ink-faded); margin-bottom: 0.6rem;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid var(--parchment-deep);
+    background: rgba(237,232,216,.5);
+  }
+  .practice-icon {
+    font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem;
+  }
+  .practice-key {
+    font-family: 'Cinzel', serif; font-size: 0.74rem;
+    color: var(--rub-olive); letter-spacing: 0.07em;
+    display: block; margin-bottom: 0.2rem;
+  }
+
+  /* ── 小結框 ── */
+  .summary-box {
+    border: 1.5px solid var(--gold);
+    background: linear-gradient(135deg, var(--gold-bg), rgba(237,232,216,.3));
+    padding: 1rem 1.3rem; margin: 1.2rem 0;
+    font-size: 0.87rem; line-height: 1.95;
+    color: var(--ink-faded); text-align: justify;
+  }
+  .summary-box strong { color: var(--rub-olive); }
+
+  /* ── 本文 ── */
+  .body-text {
+    font-size: 0.9rem; line-height: 2.0; color: var(--ink-faded);
+    text-align: justify; text-indent: 1.2em; margin-bottom: 0.7rem;
+  }
+  .body-text.no-indent { text-indent: 0; }
+
+  /* ── 禱告文 ── */
+  .prayer-box {
+    border: 1px dashed var(--parchment-deep);
+    background: rgba(237,232,216,.7);
+    padding: 1.3rem 1.6rem; margin: 1rem 0;
+    font-style: italic; font-size: 0.88rem;
+    line-height: 2.1; color: var(--ink-faded); text-align: justify;
+  }
+  .prayer-box .prayer-title {
+    font-family: 'Cinzel', serif; font-size: 0.72rem;
+    color: var(--rub-olive); letter-spacing: 0.12em;
+    font-style: normal; margin-bottom: 0.7rem; text-align: center;
+  }
+
+  /* ── 頁腳 ── */
+  .codex-footer {
+    text-align: center; margin-top: 2rem;
+    padding-top: 1rem; border-top: 1px solid var(--parchment-deep);
+  }
+  .codex-footer p {
+    font-family: 'Cinzel', serif; font-size: 0.68rem;
+    color: var(--ink-light); letter-spacing: 0.15em; opacity: 0.65;
+  }
+
+  strong { color: var(--ink); }
+  @media print { body { background: white; padding: 0; } .codex-cover { box-shadow: none; border: none; padding: 0; } .codex-page { padding: 2rem; } }
+  @media (max-width: 560px) { .codex-page { padding: 2rem 1.5rem; } }
+</style>
+</head>
+<body>
+
+<div class="codex-cover">
+<div class="codex-page">
+<div class="ruling-line"></div>
+
+<!-- ══ 標題 ══ -->
+<div class="book-title-wrap">
+  <div class="series-label">Epistola Secunda Ad Corinthios · Caput III</div>
+  <div class="book-title">哥林多後書</div>
+  <div class="chapter-subtitle">第三章　查經筆記</div>
+  <div class="chapter-tagline">從石版到心版，看見那不住增長的榮光</div>
+</div>
+
+<div class="ornament-divider"><span>— ◈ —</span>&ensp;<span style="color:var(--rub-olive);font-size:1.2rem;">✝</span>&ensp;<span>— ◈ —</span></div>
+
+<!-- ══ 核心口訣 ══ -->
+<div class="motto-banner">
+  <div class="motto-text">心版為書，靈光為鏡；揭開帕子，榮上加榮</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 1. 背景與結構 ══ -->
+<div class="section-heading">
+  <span class="module-num">1</span>
+  背景、經文導讀與結構回顧
+</div>
+
+<div class="body-text no-indent">想像你置身於西元一世紀的哥林多——那是一個地中海的商業樞紐，權力與名望的競技場。當時的社會極度看重「推薦信」（Letters of Recommendation），那是身分與權威的護身符。保羅的對手們帶著華麗的薦信到處宣揚，而保羅這位開拓者，卻被質疑資歷不明。</div>
+<div class="body-text no-indent">在第三章，保羅並非在自辯，而是藉此揭示了一個震撼宇宙的新約真理：<strong>真正的權威不在於羊皮紙上的墨水，而在於聖靈在生命中留下的指紋。</strong></div>
+
+<div class="verse-quote" style="margin:1rem 0;">
+  「你們明顯是基督的信，藉著我們修成的。不是用墨寫的，乃是用永生神的靈寫的；不是寫在石版上，乃是寫在心版上。」（林後 ３：３）
+</div>
+
+<div class="structure-row">
+  <div class="structure-bullet">v.1–3</div>
+  <div class="structure-content"><strong>薦信的轉移</strong>——從外在的紙張轉向信徒改變的生命。</div>
+</div>
+<div class="structure-row">
+  <div class="structure-bullet">v.4–11</div>
+  <div class="structure-content"><strong>職事的對比</strong>——從屬死、定罪的律法職事，轉向屬靈、稱義的榮光職事。</div>
+</div>
+<div class="structure-row">
+  <div class="structure-bullet">v.12–18</div>
+  <div class="structure-content"><strong>帕子的揭開</strong>——從蒙蔽的心眼轉向基督，在聖靈裡得著自由並漸漸模成主像。</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 2. 神學矯正 ══ -->
+<div class="section-heading">
+  <span class="module-num">2</span>
+  神學觀念矯正
+</div>
+
+<div class="body-text no-indent">我們常陷於律法主義的窠臼，以為信仰是精確的「行為準則複製品」，卻忽略了那是聖靈的「生命創作」。</div>
+
+<div class="theology-block">
+  <div class="misunder">屬靈的成熟度取決於我對教義規範的「絕對服從」與「清單勾選」。</div>
+  <div class="truth">屬靈的成熟在於<strong>聖靈在心中自由運行</strong>，使我們因著愛主而生發出自然的公義與聖潔。</div>
+</div>
+
+<div class="theology-block">
+  <div class="misunder">事奉的成功取決於我有多少頭銜、資歷與眾人的推薦。</div>
+  <div class="truth">事奉的價值在於我們是否成為<strong>基督的導管</strong>，讓神在他人心中留下不可磨滅的生命痕跡。</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 3. 側寫敘事 ══ -->
+<div class="section-heading">
+  <span class="module-num">3</span>
+  側寫式敘事
+</div>
+
+<div class="narrative-scene">
+  <p class="contrast">鏡頭拉回到西乃山的巔峰。雷轟閃電中，摩西走下山徑，他的臉龐映照著耶和華的餘暉，那光芒耀眼得讓人不敢直視。然而，摩西心中有個不安的秘密：他知道這光正在消逝。於是他取了一塊帕子蒙在臉上，不只是為了保護百姓的眼睛，更是為了遮掩那「榮光的衰殘」。</p>
+  <p>轉身看保羅。他在昏暗的油燈下提筆，沒有摩西那樣顯赫的閃電背景，甚至身處被誤解的幽谷。但他眼中閃爍著另一種光，那是「不會褪色」的光。他不需要帕子，他不需要偽裝。他像是站在陽光下的稜鏡，雖然自身卑微，卻因為轉向了基督，讓那恆久的榮光穿透而過，直達每一個受傷的靈魂。</p>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 4. 重點經文釋疑 ══ -->
+<div class="section-heading">
+  <span class="module-num">4</span>
+  重點經文釋疑
+</div>
+
+<div class="exegesis-block">
+  <span class="exegesis-verse">☆ 林後 ３：６　「字句是叫人死，精義（聖靈）是叫人活」</span>
+  <div class="exegesis-body">「字句」（Gramma）指的是律法的外在條款。律法如同一面完美的鏡子，它能精準診斷你的病症（罪），卻沒有能力醫治你。它宣告死亡，因為無人能完全達成。</div>
+  <div class="exegesis-body" style="margin-top:.5rem;"><strong>反轉關鍵：</strong>聖靈（Pneuma）則賦予了履行神旨意的能力。不是廢掉律法，而是將律法從「外在的石刻」變成了「內在的生命本能」。</div>
+</div>
+
+<div class="exegesis-block">
+  <span class="exegesis-verse">☆ 林後 ３：１７　「主就是那靈；主的靈在哪裡，那裡就得以自由」</span>
+  <div class="exegesis-note">這並非指漫無目的的放縱，而是「帕子被揭開後」的視覺自由。當我們不再受限於罪的恐懼與律法的定罪，我們才真正擁有「成為神所創造的那個我」的自由。</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 5. 跨界共鳴 ══ -->
+<div class="section-heading">
+  <span class="module-num">5</span>
+  跨界共鳴與應用
+</div>
+
+<div class="body-text no-indent">如果說第三章的核心動作是「揭開帕子」，那麼人類的文明史，其實就是一部反覆戴上帕子、又試圖揭開的漫長掙扎。保羅的洞察不只是神學命題，它像一把骨科手術刀，精準切入每個時代人心最深的卡點。</div>
+
+<div class="resonance-section">
+
+  <div class="resonance-item">
+    <div class="resonance-title">① 影像之鏡：《楚門的世界》中的帕子文明</div>
+    <div class="resonance-text">彼得·威爾執導的《楚門的世界》（1998）中，楚門·伯班克活在一個專為他打造的圓頂攝影棚，那裡有假的太陽、假的海浪、假的鄰居。最令人不寒而慄的，不是謊言的規模，而是楚門的適應力——他曾經感覺哪裡不對，卻每次都被體制精心設計的「正常感」撫平了。那塊帕子，<strong>是「舒適」——不是恐懼，是舒適。</strong><br><br>
+    保羅在林後三章說，以色列人之所以無法讀懂摩西，不是因為愚笨，而是因為「帕子蒙在他們的心上」（v.１５）。這個遮蔽來自內部，是心靈主動選擇的一種自我保護姿態——<strong>拒絕看見那個「若被看見，就必須改變」的真相。</strong>楚門每一次幾乎突破，都被自己的恐懼拉回來，直到有一天，他的船頭刺破了天幕。</div>
+  </div>
+
+  <div class="resonance-item">
+    <div class="resonance-title">② 音樂的弔詭：Leonard Cohen 的破裂之光</div>
+    <div class="resonance-text">李歐納·柯恩在〈Anthem〉裡寫下：<em>「萬物都有裂縫，光就是從那裡透進來的。」</em>柯恩不是基督徒，但他是一個深深凝視過黑暗的人。他的音樂從來不假裝裂縫不存在，相反地，他把每一條裂縫都當成邀請。<br><br>
+    這和林後三章１８節「<strong>榮上加榮</strong>」（from glory to glory）的意象驚人地呼應。那個「增長」不是直線式的進化，不是從糟糕到完美，而是在每一次破碎之後，榮光以一種更深的形態重新透入。帕子揭開的瞬間往往是最痛的時刻——因為你看見了真相，看見了你以為不存在的自己。但正是這個瞬間，光進來了。<br><br>
+    柯恩晚年的最後一張專輯《You Want It Darker》開場第一句話是向神說話——沒有帕子，沒有包裝。保羅說「像鏡子一樣返照主的榮光」（v.１８），柯恩的方式是：先把鏡子的裂縫都數清楚。</div>
+  </div>
+
+  <div class="resonance-item">
+    <div class="resonance-title">③ 社會觀察：社群媒體時代的「精裝推薦信」</div>
+    <div class="resonance-text">在２０２０年代，推薦信已進化成 IG 的粉絲數字、LinkedIn 的背書、演講邀請的 logo 牆、精心設計的個人品牌頁面。我們活在一個把「他人如何為你背書」當成資歷核心的時代——這不是墮落，這是人性，也是一種非常古老的、自西元一世紀就存在的社會焦慮。<br><br>
+    但保羅提出了一個令人不安的問題：如果你的事奉、你的創作、你的影響力，只能靠「外部認證系統」才能站立，那它是建立在聖靈的工作上，還是建立在算法的喜好上？<br><br>
+    保羅的答案是：你的「承當」（v.５，希臘文 ikanotēs，「足夠的能力/資格」）<strong>「乃是出於神」</strong>。這句話的邏輯後果是：你不需要每天早上從他人的按讚數裡去確認自己「夠不夠格」。那件事，已經被裁定了，而且裁定者不是演算法。</div>
+  </div>
+
+</div>
+
+<div class="sub-heading">◈ 核心應用：三種「揭帕子」的日常練習</div>
+
+<ul class="practice-list">
+  <li>
+    <span class="practice-icon">🪞</span>
+    <div>
+      <span class="practice-key">第一種練習：辨認你的「帕子時刻」</span>
+      當你因恐懼而說謊，當你因面子而沉默，當你因疲憊而以服從代替信念——那是帕子在運作的時刻。不需要立刻解決，先辨認它。
+    </div>
+  </li>
+  <li>
+    <span class="practice-icon">🔕</span>
+    <div>
+      <span class="practice-key">第二種練習：不帶介面的凝視</span>
+      每週一次，暫時離開所有「推薦系統」——不看統計數字，不看他人評價，找一段時間只問自己：「如果沒有人看見，我還會做這件事嗎？」這個問題不是要否定可見性，而是幫你確認根基。
+    </div>
+  </li>
+  <li>
+    <span class="practice-icon">✨</span>
+    <div>
+      <span class="practice-key">第三種練習：把破裂當入口</span>
+      柯恩說得對。那些讓你感到羞恥、不足、不夠格的裂縫，往往是榮光最容易透入的地方。不是因為痛苦本身神聖，而是因為帕子在那裡最薄。
+    </div>
+  </li>
+</ul>
+
+<div class="summary-box">
+  楚門推開了天幕的門，柯恩數清了鏡子的裂縫，保羅說我們都可以「不蒙著臉」。這三條線的終點是同一件事：<strong>一個不再需要偽裝的生命，正在蛻變成它被造本來的形狀。</strong>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 6. 禱告 ══ -->
+<div class="section-heading">
+  <span class="module-num">6</span>
+  禱告
+</div>
+
+<div class="prayer-box">
+  <div class="prayer-title">◈ 禱告文 ◈</div>
+  親愛的主，感謝祢不再將旨意寫在冰冷的石版上，而是以聖靈為墨，將愛與應許深深地刻在我們柔軟的心版上。<br><br>
+  求祢聖靈的大風吹散我們心中的帕子，除去那些律法主義的恐懼、名聲地位的枷鎖。讓我們在祢的靈裡得著真正的自由，使我們的生命不再是苦澀的修煉，而是一場榮上加榮的蛻變。<br><br>
+  願我們的一舉一動，都成為基督寫給這世界的一封情書。奉主耶穌基督聖潔的名求，阿們。
+</div>
+
+
+<!-- ══ 頁腳 ══ -->
+<div class="codex-footer">
+  <div class="ornament-divider"><span>◈ ✝ ◈</span></div>
+  <p>Soli Deo Gloria　·　快樂查經班　·　哥林多後書第三章</p>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

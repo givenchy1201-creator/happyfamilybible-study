@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬可福音 第十一章 查經分享</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:       #f4e8c1;
+    --parchment-dark:  #e8d49a;
+    --parchment-deep:  #d4b96a;
+    --ink:             #1a0e00;
+    --ink-faded:       #3d2b1a;
+    --ink-light:       #5c3d1e;
+    --rubrication:     #8b1a1a;
+    --rubrication-gold:#7a5c00;
+    --gold:            #c8960c;
+    --gold-light:      #e8c84a;
+    --gold-pale:       #f5e090;
+    --blue-initial:    #1a3a6b;
+    --border-dark:     #5c3d1e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #2a1a0a;
+    background-image:
+      radial-gradient(ellipse at 20% 20%, #3d2010 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, #1a0d05 0%, transparent 60%);
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .codex-cover {
+    max-width: 820px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #3d2a10 0%, #1e1008 100%);
+    border: 3px solid #6b4a1e;
+    border-radius: 4px;
+    padding: 6px;
+    box-shadow:
+      0 0 0 1px #c8960c55,
+      8px 12px 40px rgba(0,0,0,.8),
+      -2px -2px 12px rgba(200,150,12,.15);
+  }
+
+  .codex-page {
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"),
+      linear-gradient(180deg,
+        rgba(210,180,100,.25) 0%,
+        rgba(244,232,193,.0) 15%,
+        rgba(244,232,193,.0) 85%,
+        rgba(180,140,60,.2) 100%);
+    border: 1px solid var(--parchment-dark);
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .codex-page::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 60px 120px at 5% 30%, rgba(160,110,40,.12) 0%, transparent 100%),
+      radial-gradient(ellipse 40px 80px at 95% 70%, rgba(140,90,20,.1) 0%, transparent 100%),
+      radial-gradient(ellipse 80px 60px at 50% 95%, rgba(180,130,50,.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .ruling-line {
+    position: absolute;
+    left: 2.6rem; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, transparent 5%, rgba(160,110,60,.3) 20%, rgba(160,110,60,.3) 80%, transparent 95%);
+  }
+
+  /* ── 章號標記（與第一章區分：用藍色裝飾首字母風格） ── */
+  .book-title-wrap {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .book-title-wrap::before,
+  .book-title-wrap::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-initial), var(--gold), var(--blue-initial), transparent);
+    margin: 0.4rem auto;
+    max-width: 85%;
+  }
+
+  .series-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.35em;
+    color: var(--rubrication-gold);
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--rubrication);
+    text-shadow: 1px 1px 0 rgba(200,150,12,.4);
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.0rem;
+    color: var(--ink-faded);
+    letter-spacing: 0.15em;
+    margin-top: 0.25rem;
+  }
+
+  .date-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--ink-light);
+    letter-spacing: 0.2em;
+    margin-top: 0.3rem;
+    opacity: 0.75;
+  }
+
+  .ornament-divider {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.5rem;
+    margin: 1.4rem 0;
+    line-height: 1;
+  }
+  .ornament-divider span { display: inline-block; vertical-align: middle; }
+  .ornament-divider .cross { color: var(--rubrication); font-size: 1.3rem; }
+  .ornament-line {
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--parchment-deep), var(--gold), var(--parchment-deep), transparent);
+    margin: 0.2rem auto;
+    max-width: 70%;
+  }
+
+  .verse-declaration {
+    border: 2px solid var(--rubrication);
+    background: linear-gradient(135deg, rgba(139,26,26,.06) 0%, rgba(200,150,12,.06) 100%);
+    padding: 1.2rem 1.6rem;
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+  }
+  .verse-declaration::before, .verse-declaration::after {
+    content: '✦';
+    position: absolute;
+    color: var(--gold); font-size: 1.1rem;
+  }
+  .verse-declaration::before { top: -0.7rem; left: 50%; transform: translateX(-50%); background: var(--parchment); padding: 0 0.5rem; }
+  .verse-declaration::after  { bottom: -0.7rem; left: 50%; transform: translateX(-50%); background: var(--parchment); padding: 0 0.5rem; }
+  .verse-declaration p { font-size: 1.05rem; line-height: 1.9; color: var(--ink-faded); }
+  .verse-declaration strong { color: var(--rubrication); font-weight: 700; }
+
+  .section-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 1.0rem;
+    font-weight: 700;
+    color: var(--rubrication);
+    letter-spacing: 0.1em;
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--rubrication);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-heading .roman {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.15rem;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .sub-heading {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    color: var(--blue-initial);
+    letter-spacing: 0.08em;
+    margin: 1.3rem 0 0.5rem;
+    font-weight: 600;
+  }
+
+  .body-text {
+    font-size: 0.9rem;
+    line-height: 2.0;
+    color: var(--ink-faded);
+    text-align: justify;
+    text-indent: 1.2em;
+    margin-bottom: 0.7rem;
+  }
+  .body-text.no-indent { text-indent: 0; }
+
+  .codex-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0.8rem 0.5rem;
+  }
+  .codex-list li {
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: var(--ink-faded);
+    padding-left: 1.4em;
+    position: relative;
+    margin-bottom: 0.25rem;
+  }
+  .codex-list li::before {
+    content: '✦';
+    position: absolute; left: 0;
+    color: var(--gold);
+    font-size: 0.6rem;
+    top: 0.55em;
+  }
+  .codex-list.numbered { counter-reset: codex-counter; }
+  .codex-list.numbered li::before {
+    content: counter(codex-counter) '.';
+    counter-increment: codex-counter;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    color: var(--rubrication);
+    top: 0.3em;
+  }
+
+  .verse-highlight {
+    border-left: 3px solid var(--rubrication);
+    background: linear-gradient(90deg, rgba(139,26,26,.06) 0%, transparent 80%);
+    padding: 0.8rem 1rem 0.8rem 1.2rem;
+    margin: 1rem 0;
+  }
+  .verse-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+  .verse-text {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  /* ── 本章特殊：進城標誌框（深藍色） ── */
+  .entry-banner {
+    border: 2px solid var(--blue-initial);
+    background: linear-gradient(135deg, rgba(26,58,107,.06) 0%, rgba(200,150,12,.04) 100%);
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    text-align: center;
+  }
+  .entry-banner p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--blue-initial);
+    letter-spacing: 0.08em;
+    line-height: 1.7;
+  }
+  .entry-banner .prophecy {
+    font-style: italic;
+    color: var(--ink-faded);
+    font-family: 'Noto Serif TC', serif;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  .narrative-box {
+    border: 1px solid var(--parchment-deep);
+    background: linear-gradient(160deg, rgba(200,150,12,.06) 0%, rgba(244,232,193,.3) 100%);
+    padding: 1.3rem 1.5rem;
+    margin: 1.2rem 0;
+    position: relative;
+  }
+  .narrative-box::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1rem;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    background: var(--parchment);
+    padding: 0 0.3rem;
+    opacity: 0.6;
+  }
+  .narrative-box p {
+    font-size: 0.88rem;
+    line-height: 2.05;
+    color: var(--ink-faded);
+    text-align: justify;
+    margin-bottom: 0.6rem;
+    text-indent: 1.2em;
+  }
+  .narrative-box p:last-child { margin-bottom: 0; }
+
+  .five-points {
+    border: 1.5px solid var(--rubrication);
+    padding: 1rem 1.4rem;
+    margin: 1.2rem 0;
+    background: rgba(139,26,26,.03);
+  }
+  .five-points-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    color: var(--rubrication);
+    text-align: center;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid var(--rubrication);
+    padding-bottom: 0.4rem;
+  }
+  .five-point-item {
+    font-size: 0.85rem;
+    color: var(--ink-faded);
+    line-height: 1.8;
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 0.2rem;
+  }
+  .five-point-num {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 0.78rem;
+    flex-shrink: 0;
+    width: 1.2rem;
+    text-align: right;
+  }
+
+  .exegesis-block { margin: 1.2rem 0; }
+  .exegesis-verse {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    background: linear-gradient(90deg, rgba(200,150,12,.1), transparent);
+    border-left: 2px solid var(--gold);
+  }
+  .exegesis-verse em {
+    color: var(--rubrication);
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* ── 本章特殊：二難論框 ── */
+  .dilemma-box {
+    border: 1px dashed var(--parchment-deep);
+    background: rgba(26,58,107,.04);
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+  }
+  .dilemma-box .dilemma-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.76rem;
+    color: var(--blue-initial);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.6rem;
+    text-align: center;
+  }
+  .dilemma-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0.8rem;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--ink-faded);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+  }
+  .dilemma-row .vs {
+    color: var(--rubrication);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .dilemma-row .choice {
+    border: 1px solid var(--parchment-deep);
+    padding: 0.4rem 0.6rem;
+    background: rgba(244,232,193,.5);
+  }
+  .dilemma-row .consequence {
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink-light);
+  }
+
+  .devotion-box {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, rgba(200,150,12,.08) 0%, rgba(244,232,193,.2) 100%);
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .devotion-box::before {
+    content: '✝';
+    position: absolute;
+    top: -1rem; left: 50%; transform: translateX(-50%);
+    font-size: 1.4rem;
+    color: var(--gold);
+    background: var(--parchment);
+    padding: 0 0.5rem;
+  }
+  .devotion-salutation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--rubrication-gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+
+  .codex-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--parchment-deep);
+  }
+  .codex-footer p {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .dilemma-row { grid-template-columns: 1fr; } }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .codex-cover { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+    .codex-page { padding: 2rem; }
+  }
+
+  strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<div class="codex-cover">
+<div class="codex-page">
+<div class="ruling-line"></div>
+
+<!-- ══ 標題區 ══ -->
+<div class="book-title-wrap">
+  <div class="series-label">Evangelium Secundum Marcum · Caput XI</div>
+  <div class="book-title">馬可福音</div>
+  <div class="chapter-subtitle">第十一章　查經分享</div>
+  <div class="date-tag">Anno Domini MMXXV · VIII · XXIII</div>
+</div>
+
+<div class="ornament-divider">
+  <span>— ✦ —</span><span class="cross"> ✝ </span><span>— ✦ —</span>
+</div>
+
+<!-- ══ 全書核心宣言 ══ -->
+<div class="verse-declaration">
+  <p>耶穌是<strong>神的兒子</strong>（可１：１），但祂選擇以<strong>僕人的身分</strong>（可１０：４５）<br>
+  透過受苦與復活帶來救贖。<br>
+  凡跟隨祂的人，應當<strong>捨己、背十字架</strong>（可８：３４）。</p>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 一、前章回顧 ══ -->
+<div class="section-heading"><span class="roman">I</span> 《馬可福音》前十章回顧</div>
+
+<div class="body-text no-indent">《馬可福音》為四福音書中最短、最緊湊、耶穌神蹟最密集的福音書。寫作對象是【外邦人】，特別強調耶穌的大能，突出耶穌的【神蹟】與【權柄】，聚焦【受苦的僕人】與【彌賽亞的秘密】，更強調【十字架】的象徵意義，同時特別突顯門徒的負面或失敗形象。</div>
+
+<div class="sub-heading">◈ 前十章三部分概要</div>
+
+<div class="two-col">
+  <div style="border:1px solid var(--parchment-deep);padding:0.8rem 1rem;background:rgba(200,150,12,.03);">
+    <div style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--rubrication);letter-spacing:.08em;margin-bottom:.5rem;">第一部分：序幕（１：１－１５）</div>
+    <div style="font-size:0.82rem;color:var(--ink-faded);line-height:1.7;">
+      ✦ 施洗約翰預備道路<br>✦ 耶穌受洗與受試探
+    </div>
+  </div>
+  <div style="border:1px solid var(--parchment-deep);padding:0.8rem 1rem;background:rgba(200,150,12,.03);">
+    <div style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--rubrication);letter-spacing:.08em;margin-bottom:.5rem;">第二部分：在加利利事工（１：１６－８：２６）</div>
+    <div style="font-size:0.82rem;color:var(--ink-faded);line-height:1.7;">
+      ✦ 呼召門徒與初期神蹟（１：１６－３：１２）<br>
+      ✦ 比喻教導與神蹟擴展（３：１３－６：６）<br>
+      ✦ 門徒訓練與外邦事工（６：７－８：２６）
+    </div>
+  </div>
+</div>
+<div style="border:1px solid var(--parchment-deep);padding:0.8rem 1rem;background:rgba(200,150,12,.03);margin-bottom:1rem;">
+  <div style="font-family:'Cinzel',serif;font-size:0.75rem;color:var(--rubrication);letter-spacing:.08em;margin-bottom:.5rem;">第三部分：十架預言之路（８：２７－１０：５２）</div>
+  <div style="font-size:0.82rem;color:var(--ink-faded);line-height:1.7;">
+    ✦ 彼得認信與首次預言（８：２７－９：１）　　✦ 變像與門徒教導（９：２－５０）　　✦ 進京前最後訓誨（１０：１－５２）
+  </div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 二、本章定位 ══ -->
+<div class="section-heading"><span class="roman">II</span> 第十一章的敘事定位</div>
+
+<div class="entry-banner">
+  <p>馬可福音第十一章，開始進入一個新的敘事轉折，也帶出新的神學主題。<br>
+  這一章是「受難週」的開端，鋪陳耶穌最後的對抗與使命。</p>
+  <div class="prophecy">撒迦利亞書 ９：９　「看哪，你的王來到你這裡！他是公義的，並且施行拯救，謙謙和和地騎著驢，就是騎著驢的駒子。」</div>
+</div>
+
+<div class="five-points">
+  <div class="five-points-title">第十一章　五個敘事重點</div>
+  <div class="five-point-item"><span class="five-point-num">一</span><span>耶穌榮耀進城進入聖殿（１－１１節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">二</span><span>耶穌咒詛無花果樹（１２－１４節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">三</span><span>耶穌潔淨聖殿（１５－１９節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">四</span><span>耶穌藉無花果樹枯乾教導（２０－２６節）</span></div>
+  <div class="five-point-item"><span class="five-point-num">五</span><span>耶穌與祭司長老們爭論權柄（２７－３３節）</span></div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 三、側寫敘事 ══ -->
+<div class="section-heading"><span class="roman">III</span> 側寫的敘事方式</div>
+
+<div class="narrative-box">
+  <p>耶穌和門徒臨近耶路撒冷時，特意安排一頭從未被騎過的小驢駒，作為祂進城座騎。祂騎著驢子進入城門，群眾熱烈地迎接祂，把衣服和樹枝鋪在路上，高聲讚頌，視祂為應許的君王。祂進了聖殿，因時候已晚，與門徒一同回到伯大尼過夜。</p>
+  <p>隔日祂從伯大尼出來時感到飢餓，看見一棵茂盛的無花果樹。樹上卻找不到果子。這棵樹表面繁茂卻毫無結果，耶穌的咒詛成為門徒眼中鮮明的記號。</p>
+  <p>祂再度進入聖殿，看見人們在其中進行買賣與兌換銀錢。祂不容許這樣的行為，將他們趕出，恢復秩序。指出聖殿原本應該是萬國禱告的地方，卻被敗壞為不義之所。祂的舉動引起宗教領袖的強烈敵意，開始謀劃殺害祂，只是暫時因群眾的擁戴而無法行動。</p>
+  <p>第二天，門徒經過前日那棵無花果樹，發現它已經完全枯萎。他們明白，耶穌的教導是要人單純信靠神，在祈求時毫不懷疑，並且以饒恕的心來到神面前，好使自己也蒙饒恕。</p>
+  <p>不久祂再次進入聖殿。宗教領袖們質疑祂的權柄，想知道祂憑藉什麼來行事。但耶穌並沒有正面回答，祂以另一個問題反問，令他們進退失據。他們既害怕群眾，也不敢承認真相，只能保持沉默。雖然祂的權柄來源依舊沒有明說，但祂的行動，早已彰顯一切。</p>
+</div>
+
+<div class="body-text no-indent">《馬可福音》第十一章的內容，主要是呈現【耶穌】這個「角色」的三重轉變：</div>
+<ul class="codex-list">
+  <li><strong>耶穌不再隱藏祂的身份</strong>——以前多次囑咐人「不要張揚祂的身份」，但這一次刻意安排騎小驢駒進城，對應舊約彌賽亞預言，接受群眾讚頌，顯明祂就是【王】與【大衛國度的承繼者】。</li>
+  <li><strong>耶穌是審判的先知、聖殿的主宰</strong>——咒詛無花果樹與潔淨聖殿兩個行動，彼此呼應，揭露宗教外表之下的空虛。</li>
+  <li><strong>擁有新權柄的人子</strong>——祂的形象從加利利的教師或醫治者，明確轉變為與最高權能者連結，挑戰舊權威，為受難週鋪陳轉折。</li>
+</ul>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 四、重點經文釋疑 ══ -->
+<div class="section-heading"><span class="roman">IV</span> 重點經文釋疑</div>
+
+<!-- 11:2 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １１：２　<em>「你們往對面村子裡去，一進去的時候，必看見一匹驢駒拴在那裡，是從來沒有人騎過的，可以解開，牽來。」</em></div>
+  <div class="body-text no-indent">「驢駒」指幼小且未經馴服的驢。在聖經神學上，象徵「專用」或「聖潔」的，也表達耶穌的使命是獨特的。</div>
+  <div class="body-text no-indent">在聖經成書時代，王者若騎「馬」進城，代表征戰與武力，是戰爭統治者的形象；但若騎「驢」，特別是驢駒，則象徵和平而來。耶穌藉此表明祂不是以武力降臨，而是以謙卑和平的形象帶來拯救，應驗彌賽亞的預言（撒迦利亞書９：９）。</div>
+</div>
+
+<!-- 11:14 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １１：１４　<em>「耶穌就對樹說：從今以後，永沒有人吃你的果子。他的門徒也聽見了。」</em></div>
+
+  <div class="body-text no-indent">經文前一節明明提到「不是收無花果的時候」（１１：１３），為何耶穌還要責備和咒詛？</div>
+  <div class="body-text no-indent">在舊約裡，無花果樹常常象徵以色列，或象徵整個屬神的群體：</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">何西阿書 ９：１０</span>
+    <div class="verse-text">「主說：我遇見以色列如葡萄在曠野；我看見你們的列祖如無花果樹上春季初熟的果子。」</div>
+  </div>
+  <div class="verse-highlight">
+    <span class="verse-ref">耶利米書 ８：１３</span>
+    <div class="verse-text">「耶和華說：我必使他們全然滅絕；葡萄樹上必沒有葡萄，無花果樹上必沒有果子，葉子也必枯乾。」</div>
+  </div>
+
+  <div class="body-text no-indent">耶穌在這裡展現的形象與耶和華無異。無花果樹枝葉茂盛，外表看來充滿生命力，實際上卻沒有結出果實，正好對應當時以色列宗教的現況。宗教的聖殿巍巍、儀式繁盛，活動看似熱鬧，實際上卻缺乏真誠的信仰，特別是缺少公義的果實。</div>
+
+  <div class="body-text no-indent">《馬可福音》故意把兩個故事交錯：①耶穌先咒詛無花果樹；②潔淨聖殿；③後來門徒再看到樹已枯乾。這種三明治敘事結構，告訴讀者無花果樹的命運，也同時象徵聖殿的結局——終將面臨乾枯，也是最終的審判。</div>
+
+  <div class="body-text no-indent">對後世跟隨耶穌的門徒而言，這是明確的提醒：信仰不只是擁有宗教外表，而是要結出與信心相稱的生命果實。</div>
+</div>
+
+<!-- 11:15-16 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １１：１５－１６　<em>「耶穌進入聖殿，趕出殿裡做買賣的人，推倒兌換銀錢之人的桌子，和賣鴿子之人的凳子；也不許人拿著器具從殿裡經過。」</em></div>
+
+  <div class="body-text no-indent">聖殿本應是「萬國禱告的殿」，象徵神與人相遇的地方。然而在耶穌時代，聖殿內部卻被商業活動和制度利益所佔據，成了牟利的工具。</div>
+  <div class="body-text no-indent">耶穌的翻桌舉動是對宗教腐敗和虛偽的公開審判。透過強烈的肢體動作揭示宗教制度的敗壞，向群眾和門徒清楚表明：真正的敬拜不是表面儀式，而是公義、信心與順服神的生命。作為神的權威者，耶穌有權決定聖殿的用途，並重新定義其屬靈的本質。</div>
+</div>
+
+<!-- 11:25-26 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １１：２５－２６　<em>「你們站著禱告的時候，若想起有人得罪你們，就當饒恕他，好叫你們在天上的父也饒恕你們的過犯。你們若不饒恕人，你們在天上的父也不饒恕你們的過犯。」</em></div>
+
+  <div class="body-text no-indent">禱告是心靈與神的真實交通。若心中懷恨、不肯饒恕他人，就會阻隔與神的親密關係。《馬可福音》藉耶穌的言行提醒：饒恕他人，是禱告得以蒙神悅納的前提；只有內心清潔、放下恩怨，才能真誠地倚靠神的能力。</div>
+  <div class="body-text no-indent">這並非形式上的規定，而是屬靈生命的實質法則——真正的信心必須活在饒恕與愛中，禱告才能帶來果效。</div>
+</div>
+
+<!-- 11:27-33 -->
+<div class="exegesis-block">
+  <div class="exegesis-verse">☆ 可 １１：２７－３３　<em>耶穌為什麼不直接回答權柄的問題？</em></div>
+
+  <div class="dilemma-box">
+    <div class="dilemma-title">◈ 二難命題：宗教領袖的困境</div>
+    <div class="dilemma-row">
+      <div class="choice">若承認約翰的洗禮<br>是從神而來</div>
+      <div class="vs">⇔</div>
+      <div class="choice">若否認約翰的洗禮<br>不是從神而來</div>
+    </div>
+    <div class="dilemma-row">
+      <div class="consequence">則必須承認耶穌的權柄<br>——這是他們不願意的</div>
+      <div class="vs"> </div>
+      <div class="consequence">則引起相信約翰的群眾不悅<br>——這是他們懼怕的</div>
+    </div>
+  </div>
+
+  <div class="body-text no-indent"><strong>❶ 語言邏輯層面：</strong>耶穌的反問，製造了質疑者無法回應的困境。這是辯論論證的「二難」命題，利用前提與結論的相互關聯，使質疑者進退失據。</div>
+  <div class="body-text no-indent"><strong>❷ 策略層面：</strong>如果耶穌直接宣稱自己的權柄來自神，很可能立刻被認定為褻瀆神，被抓住把柄控告，且可能讓群眾誤解，破壞耶穌公開傳道的時機。</div>
+  <div class="body-text no-indent"><strong>❸ 神學層面：</strong>《馬可福音》的作者透過這段對話，引發讀者自我反省，間接凸顯耶穌權柄的合法性。直接承認雖然簡單，但可能帶來立即的對抗和誤解；反問策略雖然表面迴避，實際上更有效地彰顯了神權柄的智慧與合法性。</div>
+</div>
+
+<div class="ornament-divider"><span class="ornament-line"></span></div>
+
+
+<!-- ══ 五、查經心得 ══ -->
+<div class="section-heading"><span class="roman">V</span> 查經心得分享</div>
+
+<div class="devotion-box">
+  <div class="devotion-salutation">各位親愛的快樂查經班的弟兄姊妹</div>
+
+  <div class="verse-highlight">
+    <span class="verse-ref">☆ 可 １１：２４（核心經文）</span>
+    <div class="verse-text">「凡你們禱告祈求的，無論是什麼，只要信是得著的，就必得著。」</div>
+  </div>
+
+  <div class="body-text no-indent">這句話提醒我們，禱告，並不是僅僅在嘴上說的祈願。它不是許願池式的投幣、祈求與回應，其實是一種全然信靠神的生命態度。</div>
+
+  <div class="body-text no-indent">《馬可福音》第十一章中，耶穌教導門徒【信心】的重要性，無論是移山的比喻，還是無花果樹與潔淨聖殿的故事，都指向同一個神學核心：信心的活力能夠改變生命，並彰顯神的權柄。</div>
+
+  <div class="sub-heading">◈ 以《悲慘世界》看禱告的轉化</div>
+
+  <div class="body-text no-indent">《悲慘世界》的主角尚萬強，一開始因偷一塊麵包而被捕入獄。他在獄中的禱告，從「求生」逐漸轉化：</div>
+
+  <ul class="codex-list">
+    <li><strong>第一階段：求生</strong>——尋求力量忍受艱難；面對不人道待遇，禱告讓自己保持內心的堅韌；渴望正義與救贖，禱告使他心中仍保留對公義和生命尊嚴的渴望。</li>
+    <li><strong>第二階段：悔改與感恩</strong>——因主教米里哀的仁慈，成為他人生的轉折。禱告帶有懺悔與感恩，渴望能成為一個良善的人。</li>
+    <li><strong>第三階段：為他人代禱</strong>——救助孤兒科賽特、協助瑪麗尤斯逃脫，禱告轉而為他人的苦難默禱，相信神會引導他幫助更多的人。</li>
+    <li><strong>第四階段：求真實平安</strong>——面對警察賈維的追捕，他的禱告不是為了逃避責罰，而是求最終真實的平安與勇氣，能真正忠於所相信的正義與良善。</li>
+  </ul>
+
+  <div class="body-text no-indent">從心理與神經科學的角度，禱告也有明顯的身心益處。研究指出，冥想與祈禱能降低壓力荷爾蒙，減少焦慮與抑鬱的感受，提升大腦的正向情緒處理能力。換言之，禱告不僅是靈性的行動，也是真實影響我們身心健康的過程。</div>
+
+  <div class="body-text no-indent">《馬可福音》第十一章的教導提醒我們，信心的禱告是生活的整體實踐。它要求我們在靈性上相信神，並在生活中活出順服、謙卑與饒恕的態度。正如無花果樹的寓言提醒我們：表面的敬虔不足以改變生命；唯有內心的信靠與行動，才能使禱告成為生命更新的力量。</div>
+
+  <div class="body-text no-indent">每一次真心的禱告，都是向內心深處播下信心的種子，讓我們的生命逐漸結出屬神的果子。</div>
+</div>
+
+
+<!-- ══ 頁腳 ══ -->
+<div class="codex-footer">
+  <div class="ornament-divider"><span>✦ ✝ ✦</span></div>
+  <p>Soli Deo Gloria　·　快樂查經班　·　馬可福音第十一章</p>
+</div>
+
+</div><!-- .codex-page -->
+</div><!-- .codex-cover -->
+
+</body>
+</html>
