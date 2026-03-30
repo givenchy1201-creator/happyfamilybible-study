@@ -1,1 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026快樂查經班查經計畫</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment:      #ede8d8;
+    --parchment-dark: #d8ceae;
+    --parchment-deep: #b8a878;
+    --ink:            #100e08;
+    --ink-faded:      #302a1a;
+    --ink-light:      #584e38;
+    --rub-olive:      #3a4a1a;
+    --rub-olive-mid:  #5a6a28;
+    --gold:           #9a7808;
+    --gold-mid:       #c8a010;
+    --gold-pale:      #ead878;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #181408;
+    background-image:
+      radial-gradient(ellipse at 30% 20%, #28200a 0%, transparent 55%),
+      radial-gradient(ellipse at 70% 80%, #100c04 0%, transparent 55%);
+    font-family: 'Noto Serif TC', serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .codex-cover {
+    max-width: 900px;
+    margin: 0 auto;
+    background: linear-gradient(160deg, #2a2408 0%, #141008 100%);
+    border: 3px solid #4a3e14;
+    border-radius: 3px;
+    padding: 6px;
+    box-shadow:
+      0 0 0 1px rgba(160,140,40,.25),
+      8px 12px 40px rgba(0,0,0,.85),
+      -2px -2px 12px rgba(100,120,20,.1);
+  }
+
+  .codex-page {
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+      linear-gradient(175deg, rgba(160,140,60,.18) 0%, transparent 15%, transparent 85%, rgba(140,110,40,.15) 100%);
+    border: 1px solid var(--parchment-dark);
+    padding: 3rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+
+  /* 標題區 */
+  .page-title-wrap {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1.5px solid var(--parchment-deep);
+  }
+
+  .page-title-en {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .page-title-zh {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.15em;
+  }
+
+  /* 表格 */
+  .plan-table-wrap {
+    overflow-x: auto;
+    margin: 0 -0.5rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+  }
+
+  thead tr {
+    background: rgba(58,74,26,.08);
+    border-bottom: 2px solid var(--parchment-deep);
+  }
+
+  th {
+    padding: 0.7rem 1rem;
+    font-weight: 600;
+    color: var(--rub-olive);
+    text-align: left;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 0.6rem 1rem;
+    color: var(--ink-faded);
+    border-bottom: 1px solid rgba(184,168,120,.3);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr:nth-child(even) td {
+    background: rgba(154,120,8,.03);
+  }
+
+  .name-cell {
+    font-weight: 500;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .schedule-cell {
+    color: var(--ink-light);
+    font-size: 0.85rem;
+  }
+
+  .schedule-cell.highlight {
+    color: var(--rub-olive);
+    font-weight: 500;
+  }
+
+  /* 說明區 */
+  .note-box {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    background: rgba(58,74,26,.05);
+    border-left: 2px solid var(--rub-olive-mid);
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+  }
+
+  .codex-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--parchment-dark);
+    font-size: 0.78rem;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+  }
+</style>
+</head>
+<body>
+<div class="codex-cover">
+<div class="codex-page">
+
+  <a class="back-link" href="../index.html">← 返回首頁</a>
+
+  <div class="page-title-wrap">
+    <div class="page-title-en">HAPPY FAMILY BIBLE STUDY · 2026</div>
+    <div class="page-title-zh">2026 查經計畫</div>
+  </div>
+
+  <div class="plan-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>第一期</th>
+          <th>第二期</th>
+          <th>第三期</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name-cell">1. 學問淵博王老師</td>
+          <td class="schedule-cell highlight">3/7 哥林多後第1章</td>
+          <td class="schedule-cell">7/11 列王紀上第5章</td>
+          <td class="schedule-cell">1/10 哥林多第12章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">2. 高級蓉講師</td>
+          <td class="schedule-cell">3/14 哥林多後第2章</td>
+          <td class="schedule-cell">7/18 列王紀上第6章</td>
+          <td class="schedule-cell">1/17 哥林多第13章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">3. 超級阿媽陳長老</td>
+          <td class="schedule-cell">3/21 哥林多後第3章</td>
+          <td class="schedule-cell">7/25 列王紀上第7章</td>
+          <td class="schedule-cell">1/24 哥林多第14章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">4. 六張犁尹美女</td>
+          <td class="schedule-cell">3/28 哥林多後第4章</td>
+          <td class="schedule-cell">8/1 列王紀上第8章</td>
+          <td class="schedule-cell">1/31 哥林多第15章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">5. 白泡泡 Irene 美女</td>
+          <td class="schedule-cell">4/11 哥林多後第5章</td>
+          <td class="schedule-cell">8/15 列王紀上第9章</td>
+          <td class="schedule-cell">2/7 哥林多第16章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">6. 瘦子譚美美</td>
+          <td class="schedule-cell">4/18 哥林多後第6章</td>
+          <td class="schedule-cell">8/22 列王紀上第10章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">7. 美麗善良師母</td>
+          <td class="schedule-cell">4/25 哥林多後第7章</td>
+          <td class="schedule-cell">8/29 列王紀上第11章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">8. 幼兒專家李如男</td>
+          <td class="schedule-cell">5/2 哥林多後第8章</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">9/5 列王紀上第12章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">9. 菲桃菲瑄瑄</td>
+          <td class="schedule-cell">5/9 哥林多後第9章</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">9/12 列王紀上第13章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">10. 帥哥 Rock</td>
+          <td class="schedule-cell">5/16 哥林多後第10章</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">9/19 列王紀上第14章</td>
+        </tr>
+        <tr>
+          <td class="name-cell">11. 六張犁阿明師</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">5/23 哥林多後第11章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">12. 英國美女慧宇</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">5/30 哥林多後第12章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">13. 人生導師荃</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">6/6 哥林多後第13章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">14. 高級顧問昆霖</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">6/13 列王紀上第1章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">15. 股神秋霖</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">6/20 列王紀上第2章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">16. 金門王建中</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">6/27 列王紀上第3章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+        <tr>
+          <td class="name-cell">17. 空中飛人貝蒂小姐</td>
+          <td class="schedule-cell">—</td>
+          <td class="schedule-cell">7/4 列王紀上第4章</td>
+          <td class="schedule-cell">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note-box">
+    ✦ 第一期：哥林多後書（3月－5月）　✦ 第二期：列王紀上（5月－8月）　✦ 第三期：哥林多書／列王紀上（9月－2月）
+  </div>
+
+  <div class="codex-footer">
+    <p>Soli Deo Gloria　·　快樂查經班　·　2026 查經計畫</p>
+  </div>
+
+</div>
+</div>
+</body>
+</html>
 
